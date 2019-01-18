@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExpressionGenerator.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExpressionGenerator.Common", "MathExpressionGenerator.Common\MathExpressionGenerator.Common.csproj", "{F6ACAF88-EE4F-4AC7-9567-15E7F8F75BC7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathExpressionGenerator.Web", "MathExpressionGenerator.Web\MathExpressionGenerator.Web.csproj", "{F8F58BA7-11E1-4AE1-8E5A-81F07B4173A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F6ACAF88-EE4F-4AC7-9567-15E7F8F75BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6ACAF88-EE4F-4AC7-9567-15E7F8F75BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6ACAF88-EE4F-4AC7-9567-15E7F8F75BC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F58BA7-11E1-4AE1-8E5A-81F07B4173A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F58BA7-11E1-4AE1-8E5A-81F07B4173A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F58BA7-11E1-4AE1-8E5A-81F07B4173A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F58BA7-11E1-4AE1-8E5A-81F07B4173A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
