@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E6A65451-DFC2-4495-8F65-3E5492841F2C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MathExpressionGenerator.Models</RootNamespace>
+    <AssemblyName>MathExpressionGenerator.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\ExpressionOperation.cs" />
+    <Compile Include="Enums\ExpressionType.cs" />
+    <Compile Include="Expressions\Еquations\Division\BaseDivisionEquation.cs" />
+    <Compile Include="Expressions\Еquations\Division\BaseDivision_2v.cs" />
+    <Compile Include="Factories\Implementations\MathExpressionFactory.cs" />
+    <Compile Include="Factories\Interfaces\IFactory.cs" />
+    <Compile Include="Factories\Interfaces\IMathExpressionFactory.cs" />
+    <Compile Include="Expressions\BaseMathExpression.cs" />
+    <Compile Include="Expressions\Inequalities\BaseInequality.cs" />
+    <Compile Include="Expressions\Еquations\Addition\Addition_3v1.cs" />
+    <Compile Include="Expressions\Еquations\Addition\Addition_3v4.cs" />
+    <Compile Include="Expressions\Еquations\Division\Division_2v1.cs" />
+    <Compile Include="Expressions\Еquations\Division\Division_2v2.cs" />
+    <Compile Include="Expressions\Еquations\Division\Division_2v3.cs" />
+    <Compile Include="Expressions\Еquations\Multiplication\Multiplication_3v2.cs" />
+    <Compile Include="Expressions\Еquations\Multiplication\Multiplication_3v3.cs" />
+    <Compile Include="Expressions\Еquations\Multiplication\Multiplication_3v4.cs" />
+    <Compile Include="Expressions\Еquations\Subtraction\Subtraction_3v1.cs" />
+    <Compile Include="Expressions\Еquations\Subtraction\Subtraction_3v2.cs" />
+    <Compile Include="Expressions\Еquations\Subtraction\Subtraction_3v4.cs" />
+    <Compile Include="Expressions\Еquations\Subtraction\Subtraction_3v3.cs" />
+    <Compile Include="Expressions\Еquations\Addition\Addition_3v2.cs" />
+    <Compile Include="Expressions\Еquations\Addition\Addition_3v3.cs" />
+    <Compile Include="Expressions\Еquations\Addition\Addition_2v2.cs" />
+    <Compile Include="Expressions\Еquations\Addition\Addition_2v3.cs" />
+    <Compile Include="Expressions\Еquations\Addition\Addition_2v1.cs" />
+    <Compile Include="Expressions\Еquations\BaseЕquation.cs" />
+    <Compile Include="Expressions\Еquations\Subtraction\Subtraction_2v3.cs" />
+    <Compile Include="Expressions\Еquations\Subtraction\Subtraction_2v2.cs" />
+    <Compile Include="Expressions\Еquations\Subtraction\Subtraction_2v1.cs" />
+    <Compile Include="Expressions\Еquations\Multiplication\Multiplication_2v2.cs" />
+    <Compile Include="Expressions\Еquations\Multiplication\Multiplication_2v3.cs" />
+    <Compile Include="Expressions\Еquations\Multiplication\Multiplication_2v1.cs" />
+    <Compile Include="Expressions\Еquations\Multiplication\Multiplication_3v1.cs" />
+    <Compile Include="Interfaces\IMathExpression.cs" />
+    <Compile Include="Interfaces\IRepresentable.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Expressions\Еquations\Powering\" />
+    <Folder Include="Expressions\Еquations\SquareRooting\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MathExpressionGenerator.Common\MathExpressionGenerator.Common.csproj">
+      <Project>{F6ACAF88-EE4F-4AC7-9567-15E7F8F75BC7}</Project>
+      <Name>MathExpressionGenerator.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

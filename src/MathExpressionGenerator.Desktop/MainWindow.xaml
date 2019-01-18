@@ -1,0 +1,51 @@
+﻿<Window x:Class="MathExpressionGenerator.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MathExpressionGenerator.Desktop"
+        mc:Ignorable="d"
+        Background="LightGray"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Title="Expression generator" 
+        Height="540" 
+        Width="950"
+        KeyDown="OnEnterPressed">
+    <Grid Name="MainGrid">
+        <Label Name="lblChooseExpression" Content="Choose an expression type:" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="19,16,0,0" VerticalAlignment="Top" Height="35" Width="220"/>
+        <ComboBox x:Name="comboBoxExpressionType" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="16" Margin="263,20,0,0" VerticalAlignment="Top" Width="300" Height="35"/>
+        <TextBox Name="txtBoxResults" IsReadOnly="True" FontSize="18" Background="LightGray" HorizontalAlignment="Left" Height="321" Margin="588,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320"/>
+        <Label Name="lblChooseMinNum" Content="Choose min number:" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="19,126,0,0" VerticalAlignment="Top" Height="35" Width="220"/>
+        <TextBox x:Name="txtBoxMinNumber" MaxLength="19" TextChanged="ValidateNumbers" FontSize="16" HorizontalAlignment="Left" Height="35" VerticalContentAlignment="Center" Margin="263,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
+        <Label Name="lblChooseMaxNum" Content="Choose max number:" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="19,186,0,0" VerticalAlignment="Top" Height="35" Width="220"/>
+        <TextBox x:Name="txtBoxMaxNumber" MaxLength="19" TextChanged="ValidateNumbers" FontSize="16" HorizontalAlignment="Left" Height="35" VerticalContentAlignment="Center" Margin="263,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
+        <Label Name="lblExprCount" Content="Expressions count:" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="19,246,0,0" VerticalAlignment="Top" Height="35" Width="220"/>
+        <TextBox x:Name="txtBoxCount" MaxLength="19" TextChanged="ValidateNumbers" FontSize="16" HorizontalAlignment="Left" Height="35" VerticalContentAlignment="Center" Margin="263,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
+        <Label Name="lblSaveAs" Content="Save as:" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="583,346,0,0" VerticalAlignment="Top" Height="29" Width="118"/>
+        <CheckBox Cursor="Hand" Name="chkBoxOpenFileWhenReady" IsChecked="True" Content="Open file when ready" FontSize="16" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="590,426,0,0" VerticalAlignment="Top" Height="49" Width="226" RenderTransformOrigin="3.029,4.264"/>
+        <CheckBox Cursor="Hand" Name="chkBoxRandomize" IsChecked="True" Content="Randomize" FontSize="16" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="225,296,0,0" VerticalAlignment="Top" Height="39" Width="117"/>
+        <TextBox x:Name="AlertBox" HorizontalAlignment="Left" Background="LightGray" BorderThickness="0" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="Red" Height="102" Margin="22,375,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="553"/>
+        <Button Cursor="Hand" Name="btnSave" Content="Save" Background="CornflowerBlue" FontSize="22" HorizontalAlignment="Left" Margin="821,431,0,0" VerticalAlignment="Top" Width="86" Height="44" RenderTransformOrigin="0.504,1.539" Click="SaveButton_Click"/>
+        <ComboBox SelectedIndex="0" x:Name="comboBoxSaveDirectory" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="16" Margin="744,379,0,0" VerticalAlignment="Top" Width="163" Height="35">
+            <ComboBoxItem Name="comboBoxDesktop" Selected="Desktop_Selected" FontSize="16" VerticalContentAlignment="Center">Desktop</ComboBoxItem>
+            <ComboBoxItem Name="comboBoxMyDocuments" Selected="MyDocuments_Selected" FontSize="16" VerticalContentAlignment="Center">My Documents</ComboBoxItem>
+            <ComboBoxItem Name="comboBoxFolderBrowser" Selected="BrowseDirectory_Selected" FontSize="16" VerticalContentAlignment="Center">Browse...</ComboBoxItem>
+        </ComboBox>
+        <ComboBox x:Name="comboBoxFileFormat" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="16" Margin="589,379,0,0" VerticalAlignment="Top" Width="138" Height="35">
+            <ComboBoxItem Name="txtFileFormat" IsSelected="True" FontSize="16" VerticalContentAlignment="Center">Text file (.txt)</ComboBoxItem>
+            <ComboBoxItem Name="docFileFormat" FontSize="16" VerticalContentAlignment="Center">Word file (.doc)</ComboBoxItem>
+        </ComboBox>
+        <Label Name="lblSaveTo" Content="Save to:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="740,346,0,0" Width="105" VerticalAlignment="Top" Height="30"/>
+        <Button Cursor="Hand" Name="btnAdd" Content="Add ->" Background="CornflowerBlue" FontSize="22" HorizontalAlignment="Left" Margin="468,296,0,0" VerticalAlignment="Top" Width="94" Height="44" Click="AddButton_Click" />
+        <Button Cursor="Hand" Name="btnClear" Content="Clear" Background="CornflowerBlue" FontSize="22" HorizontalAlignment="Left" Margin="348,296,0,0" VerticalAlignment="Top" Width="94" Height="44" Click="ClearButton_Click"/>
+        <Label Name="lblLanguage" Content="Language:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="31,302,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.448,0.219" Width="67"/>
+        <ComboBox Name="comboBoxLang" SelectionChanged="ComboBoxLang_SelectionChanged" HorizontalAlignment="Left" Margin="101,305,0,0" VerticalAlignment="Top" Width="111"/>
+        <CheckBox Cursor="Hand" Name="chkBoxAddition" Content="Addition" HorizontalAlignment="Left" Margin="80,76,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxAddition_Unchecked" Checked="ChkBoxAddition_Checked"/>
+        <CheckBox Cursor="Hand" Name="chkBoxSubtraction" Content="Subtraction" HorizontalAlignment="Left" Margin="80,96,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxSubtraction_Unchecked" Checked="ChkBoxSubtraction_Checked"/>
+        <CheckBox Cursor="Hand" Name="chkBoxMultiplication" Content="Multiplication" HorizontalAlignment="Left" Margin="200,76,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxMultiplication_Unchecked" Checked="ChkBoxMultiplication_Checked"/>
+        <CheckBox Cursor="Hand" Name="chkBoxDivision" Content="Division" HorizontalAlignment="Left" Margin="200,96,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxDivision_Unchecked" Checked="ChkBoxDivision_Checked"/>
+        <CheckBox Cursor="Hand" Name="chkBoxPowering" Content="Powering" HorizontalAlignment="Left" Margin="320,76,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxPowering_Unchecked" Checked="ChkBoxPowering_Checked"/>
+        <CheckBox Cursor="Hand" Name="chkBoxRooting" Content="Square rooting" HorizontalAlignment="Left" Margin="320,96,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxRooting_Unchecked" Checked="ChkBoxRooting_Checked"/>
+    </Grid>
+</Window>
