@@ -1,13 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MathExpressionGenerator.Common.Containers;
+using MathExpressionGenerator.Models.Factories.Implementations;
+using MathExpressionGenerator.Models.Factories.Interfaces;
+using MathExpressionGenerator.Services.Implementations;
+using MathExpressionGenerator.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Text;
 
 namespace MathExpressionGenerator.Web
 {
@@ -30,6 +33,16 @@ namespace MathExpressionGenerator.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddSingleton<ILanguageContainer, LanguageContainer>();
+
+            services.AddTransient<IMathExpressionService, MathExpressionService>();
+            services.AddTransient<IExpressionExtractor, ExpressionExtractor>();
+            services.AddTransient<IExpressionContainer, ExpressionContainer>();
+            services.AddTransient<IMathExpressionFactory, MathExpressionFactory>();
+            services.AddTransient<IFileService, FileService>();
+            
+            services.AddTransient<Random>(sp => new Random());
+            services.AddTransient<StringBuilder>(sp => new StringBuilder());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -43,15 +56,26 @@ namespace MathExpressionGenerator.Web
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler(appBuilder => appBuilder
+                    .Run(async context => 
+                    {
+                        context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                        await context.Response.WriteAsync("Bad request.");
+                    }));
+
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
-            app.UseMvc();
+            
+            app.UseMvc(routes => 
+            {
+                routes.MapRoute(
+                    "deafult",
+                    "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }
