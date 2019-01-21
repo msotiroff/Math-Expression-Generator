@@ -3,6 +3,7 @@
     public interface ILanguage
     {
         string ChooseExpressionType { get; }
+        string ChooseOperationType { get; }
         string ChooseMinOperand { get; }
         string ChooseMaxOperand { get; }
         string ExpressionsCount { get; }
@@ -19,14 +20,16 @@
         string InvalidNumberMaxValueErrorMsg { get; }
         string InvalidDifferenceMinMaxValue { get; }
         string Language { get; }
-        string WindowTitle { get; }
+        string GeneratorTitle { get; }
         string Addition { get; }
         string Subtraction { get; }
-        string Miltiplication { get; }
+        string Multiplication { get; }
         string Division { get; }
         string Powering { get; }
         string SquareRooting { get; }
         string DivisionWarningMessage { get; }
         string MaxCountOfExpressionsExceeded { get; }
+
+        string GetPropertyValue(string propertyName);
     }
 }

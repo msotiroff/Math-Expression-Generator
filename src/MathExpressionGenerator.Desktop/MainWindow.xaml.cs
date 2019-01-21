@@ -231,14 +231,12 @@
                 }
                 else if (number < minValue)
                 {
-                    alertMessage += string.Format(
-                        this.currentLanguage.InvalidNumberMinValueErrorMsg, number, minValue);
+                    alertMessage += this.currentLanguage.InvalidNumberMinValueErrorMsg;
                     alertMessage += Environment.NewLine;
                 }
                 else if (number > maxValue)
                 {
-                    alertMessage += string.Format(
-                        this.currentLanguage.InvalidNumberMaxValueErrorMsg, number, maxValue);
+                    alertMessage += this.currentLanguage.InvalidNumberMaxValueErrorMsg;
                     alertMessage += Environment.NewLine;
                 }
             }
@@ -279,7 +277,7 @@
         private void UpdateControlsLanguage()
         {
             var x = this.AlertBox.Text;
-            this.Title = this.currentLanguage.WindowTitle;
+            this.Title = this.currentLanguage.GeneratorTitle;
 
             this.lblChooseExpression.Content = this.currentLanguage.ChooseExpressionType;
             this.lblChooseMinNum.Content = this.currentLanguage.ChooseMinOperand;
@@ -298,7 +296,7 @@
 
             this.chkBoxAddition.Content = this.currentLanguage.Addition;
             this.chkBoxSubtraction.Content = this.currentLanguage.Subtraction;
-            this.chkBoxMultiplication.Content = this.currentLanguage.Miltiplication;
+            this.chkBoxMultiplication.Content = this.currentLanguage.Multiplication;
             this.chkBoxDivision.Content = this.currentLanguage.Division;
             this.chkBoxPowering.Content = this.currentLanguage.Powering;
             this.chkBoxRooting.Content = this.currentLanguage.SquareRooting;

@@ -1,61 +1,63 @@
 ﻿namespace MathExpressionGenerator.Common.Languages
 {
-    public class EnglishLanguage : ILanguage
+    public class EnglishLanguage : BaseLanguage
     {
-        public string ChooseExpressionType => "Choose Expression Type:";
+        public override string ChooseExpressionType => "Choose Expression Type:";
 
-        public string ChooseMinOperand => "Choose Min Operand:";
+        public override string ChooseOperationType => "Choose Operation:";
 
-        public string ChooseMaxOperand => "Choose Max Operand:";
+        public override string ChooseMinOperand => "Choose Min Operand:";
 
-        public string ExpressionsCount => "Expressions count:";
+        public override string ChooseMaxOperand => "Choose Max Operand:";
 
-        public string Randomize => "Randomize";
+        public override string ExpressionsCount => "Expressions count:";
 
-        public string Clear => "Clear";
+        public override string Randomize => "Randomize";
 
-        public string Add => "Add";
+        public override string Clear => "Clear";
 
-        public string SaveAs => "Save as:";
+        public override string Add => "Add";
 
-        public string Save => "Save";
+        public override string SaveAs => "Save as:";
 
-        public string SaveTo => "Save to:";
+        public override string Save => "Save";
 
-        public string OpenFileWhenReady => "Open file when ready";
+        public override string SaveTo => "Save to:";
 
-        public string ExpressionsFileName => "Math expressions";
+        public override string OpenFileWhenReady => "Open file when ready";
 
-        public string InvalidNumberFormatErrorMsg => "\"{0}\" is not a valid number!";
+        public override string ExpressionsFileName => "Math expressions";
 
-        public string InvalidNumberMinValueErrorMsg => "\"{0}\" is less than the minimum possible value: \"{1}\"";
+        public override string InvalidNumberFormatErrorMsg => "\"{0}\" is not a valid number!";
 
-        public string InvalidNumberMaxValueErrorMsg => "\"{0}\" is more than the maximum possible value: \"{1}\"";
+        public override string InvalidNumberMinValueErrorMsg => $"Smallest possible operand's value is \"{Constants.OperandMinValue}\"";
 
-        public string InvalidDifferenceMinMaxValue => "Min number should be equal or less than Max number!";
-        
-        public string Language => "Language:";
+        public override string InvalidNumberMaxValueErrorMsg => $"Largest possible operand's value is \"{Constants.OperandMaxValue}\"";
 
-        public string WindowTitle => "Expression generator";
+        public override string InvalidDifferenceMinMaxValue => "Min number should be equal or less than Max number!";
 
-        public string Addition => "Addition";
+        public override string Language => "Language:";
 
-        public string Subtraction => "Subtraction";
+        public override string GeneratorTitle => "Expression generator";
 
-        public string Miltiplication => "Miltiplication";
+        public override string Addition => "Addition";
 
-        public string Division => "Division";
+        public override string Subtraction => "Subtraction";
 
-        public string Powering => "Powering";
+        public override string Multiplication => "Miltiplication";
 
-        public string SquareRooting => "Square rooting";
+        public override string Division => "Division";
 
-        public string DivisionWarningMessage 
+        public override string Powering => "Powering";
+
+        public override string SquareRooting => "Square rooting";
+
+        public override string DivisionWarningMessage 
             => "Warning: The min and max operand may vary, if you generate a division without overage.";
 
-        public string MaxCountOfExpressionsExceeded 
+        public override string MaxCountOfExpressionsExceeded 
             => $"Max expressions count per singe generation is {Constants.ExpressionsCountMaxValue}.";
-
+        
         public override string ToString() => "English";
     }
 }

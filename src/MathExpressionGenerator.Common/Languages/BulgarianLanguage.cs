@@ -1,60 +1,62 @@
 ﻿namespace MathExpressionGenerator.Common.Languages
 {
-    public class BulgarianLanguage : ILanguage
+    public class BulgarianLanguage : BaseLanguage
     {
-        public string ChooseExpressionType => "Изберете вид израз:";
-
-        public string ChooseMinOperand => "Минимален операнд:";
-
-        public string ChooseMaxOperand => "Максимален операнд:";
-
-        public string ExpressionsCount => "Брой изрази:";
-
-        public string Randomize => "Разбъркай";
-
-        public string Clear => "Изчисти";
-
-        public string Add => "Добави";
-
-        public string SaveAs => "Запази като:";
-
-        public string Save => "Запази";
-
-        public string SaveTo => "Запази в:";
-
-        public string OpenFileWhenReady => "Отвори след изпълнение";
-
-        public string ExpressionsFileName => "Уравнения";
-
-        public string InvalidNumberFormatErrorMsg => "\"{0}\" не е валидно число.";
-
-        public string InvalidNumberMinValueErrorMsg => "\"{0}\" е по - малко от минимално допустимото: \"{1}\"";
-
-        public string InvalidNumberMaxValueErrorMsg => "\"{0}\" е по - голямо от максимално допустимото: \"{1}\"";
-
-        public string InvalidDifferenceMinMaxValue => "Максималното число трябва да бъде равно или по - голямо от минималното число!";
-        
-        public string Language => "Език:";
-
-        public string WindowTitle => "Генератор на уравнения";
-
-        public string Addition => "Събиране";
-
-        public string Subtraction => "Изваждане";
-
-        public string Miltiplication => "Умножение";
-
-        public string Division => "Деление";
-
-        public string Powering => "Степенуване";
-
-        public string SquareRooting => "Коренуване";
-
-        public string DivisionWarningMessage
+        public override string ChooseExpressionType => "Изберете вид израз:";
+               
+        public override string ChooseOperationType => "Изберете операция:";
+               
+        public override string ChooseMinOperand => "Минимален операнд:";
+               
+        public override string ChooseMaxOperand => "Максимален операнд:";
+               
+        public override string ExpressionsCount => "Брой изрази:";
+               
+        public override string Randomize => "Разбъркай";
+               
+        public override string Clear => "Изчисти";
+               
+        public override string Add => "Добави";
+               
+        public override string SaveAs => "Запази като:";
+               
+        public override string Save => "Запази";
+               
+        public override string SaveTo => "Запази в:";
+               
+        public override string OpenFileWhenReady => "Отвори след изпълнение";
+               
+        public override string ExpressionsFileName => "Уравнения";
+               
+        public override string InvalidNumberFormatErrorMsg => "\"{0}\" не е валидно число.";
+               
+        public override string InvalidNumberMinValueErrorMsg => $"Минимално допустимата стойност на операнд е \"{Constants.OperandMinValue}\"";
+               
+        public override string InvalidNumberMaxValueErrorMsg => $"Максимално допустимата стойност на операнд е \"{Constants.OperandMinValue}\"";
+               
+        public override string InvalidDifferenceMinMaxValue => "Максималното число трябва да бъде равно или по - голямо от минималното число!";
+               
+        public override string Language => "Език:";
+               
+        public override string GeneratorTitle => "Генератор на уравнения";
+               
+        public override string Addition => "Събиране";
+               
+        public override string Subtraction => "Изваждане";
+               
+        public override string Multiplication => "Умножение";
+               
+        public override string Division => "Деление";
+               
+        public override string Powering => "Степенуване";
+               
+        public override string SquareRooting => "Коренуване";
+               
+        public override string DivisionWarningMessage
             => "Внимание: Минималната и максималната стойност на операндите може да вариара, " +
             "ако генерирате уравнения с деление без остатък.";
 
-        public string MaxCountOfExpressionsExceeded
+        public override string MaxCountOfExpressionsExceeded
             => $"Максималния брой изрази на всяко генериране е {Constants.ExpressionsCountMaxValue}.";
 
         public override string ToString() => "Български";
