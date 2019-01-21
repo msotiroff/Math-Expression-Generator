@@ -31,7 +31,14 @@
 
             throw new KeyNotFoundException(nameof(type));
         }
-        
+
+        public ILanguage Get(string languageName)
+        {
+            return this.languages
+                .Values
+                .FirstOrDefault(kvp => kvp.ToString() == languageName);
+        }
+
         private void InstantiateAllLanguages()
         {
             Assembly

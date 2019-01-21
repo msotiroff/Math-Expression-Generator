@@ -8,6 +8,8 @@
     {
         ILanguage Get(Type type);
 
+        ILanguage Get(string languageName);
+
         IEnumerable<ILanguage> All();
     }
 }
