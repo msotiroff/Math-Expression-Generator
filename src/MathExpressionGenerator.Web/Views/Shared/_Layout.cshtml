@@ -1,9 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
+@{
+    var languageContainer = this.Context.RequestServices.GetRequiredService<ILanguageContainer>();
+}
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MathExpressionGenerator.Web</title>
+    <title>Math Expression Generator</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -17,7 +20,7 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,12 +29,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-page="/Index" class="navbar-brand">MathExpressionGenerator.Web</a>
+                <a href="#" class="navbar-brand">@BaseController.CurrentLanguage.GeneratorTitle</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-page="/Index">Home</a></li>
-                    <li><a asp-page="/Help">Help</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                    @foreach (var language in languageContainer.All())
+                    {
+                        <li>
+                            <form asp-area="" asp-controller="language" asp-action="change" method="post">
+                                <input name="language" value="@language.ToString()" hidden="hidden" readonly="readonly" />
+                                <input name="returnToArea" value="@ViewContext.RouteData.Values["area"]" hidden="hidden" readonly="readonly" />
+                                <input name="returnToController" value="@ViewContext.RouteData.Values["controller"]" hidden="hidden" readonly="readonly" />
+                                <input name="returnToAction" value="@ViewContext.RouteData.Values["action"]" hidden="hidden" readonly="readonly" />
+                                <button type="submit" class="btn btn-link btn-navbar">@language.ToString()</button>
+                            </form>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -40,7 +53,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2018 - MathExpressionGenerator.Web</p>
+            <p>&copy; @DateTime.UtcNow.Year - Math Expression Generator</p>
         </footer>
     </div>
 
