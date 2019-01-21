@@ -16,8 +16,8 @@
   <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Home\" />
+    <ProjectReference Include="..\MathExpressionGenerator.Common\MathExpressionGenerator.Common.csproj" />
+    <ProjectReference Include="..\MathExpressionGenerator.Models\MathExpressionGenerator.Models.csproj" />
+    <ProjectReference Include="..\MathExpressionGenerator.Services\MathExpressionGenerator.Services.csproj" />
   </ItemGroup>
 </Project>

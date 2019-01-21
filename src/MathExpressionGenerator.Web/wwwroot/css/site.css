@@ -10,6 +10,18 @@ body {
     padding-right: 15px;
 }
 
+.btn {
+    margin: 2px;
+}
+
+.btn-navbar {
+    margin-top: 7px !important;
+}
+
+textarea {
+    resize: none;
+}
+
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
