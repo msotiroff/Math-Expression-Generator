@@ -3,6 +3,7 @@ using MathExpressionGenerator.Models.Factories.Implementations;
 using MathExpressionGenerator.Models.Factories.Interfaces;
 using MathExpressionGenerator.Services.Implementations;
 using MathExpressionGenerator.Services.Interfaces;
+using MathExpressionGenerator.Web.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,18 +27,20 @@ namespace MathExpressionGenerator.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            services
+                .Configure<CookiePolicyOptions>(options =>
+                {
+                    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                    options.CheckConsentNeeded = context => true;
+                    options.MinimumSameSitePolicy = SameSiteMode.None;
+                })
+                .Configure<FileContentTypes>(this.Configuration.GetSection("FileContentTypes"));
 
             services.AddSingleton<ILanguageContainer, LanguageContainer>();
+            services.AddSingleton<IExpressionContainer, ExpressionContainer>();
 
             services.AddTransient<IMathExpressionService, MathExpressionService>();
             services.AddTransient<IExpressionExtractor, ExpressionExtractor>();
-            services.AddTransient<IExpressionContainer, ExpressionContainer>();
             services.AddTransient<IMathExpressionFactory, MathExpressionFactory>();
             services.AddTransient<IFileService, FileService>();
             
