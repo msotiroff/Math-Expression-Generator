@@ -1,4 +1,5 @@
-﻿using MathExpressionGenerator.Common.Languages;
+﻿using MathExpressionGenerator.Common;
+using MathExpressionGenerator.Common.Languages;
 using MathExpressionGenerator.Common.ViewModels;
 using MathExpressionGenerator.Models.Enums;
 using MathExpressionGenerator.Web.Attribute;
@@ -36,15 +37,11 @@ namespace MathExpressionGenerator.Web.Models
         [EqualOrGreaterThan(nameof(OperandMinValue))]
         public int OperandMaxValue { get; set; }
 
-        [Range(1, 1000)]
+        [Range(1, Constants.ExpressionsCountMaxValue)]
         public int ExpressionsCount { get; set; }
         
         public bool ShouldRandomize { get; set; }
-
-        public string FileExtensionSelected { get; set; }
-
-        public IEnumerable<SelectListItem> SaveAsOptions { get; set; }
-
+        
         public string Result { get; set; }
 
         public bool ShowErrors { get; set; }
@@ -53,12 +50,6 @@ namespace MathExpressionGenerator.Web.Models
             IEnumerable<ExpressionViewModel> expressions,
             ILanguage language)
         {
-            this.SaveAsOptions = new List<SelectListItem>
-            {
-                new SelectListItem("Text document", ".txt", true),
-                new SelectListItem("MS Word document", ".doc", false),
-            };
-
             this.AllExpressionTypes = expressions
                     .Select(et => new SelectListItem(et.ToString(), et.Type.FullName));
 

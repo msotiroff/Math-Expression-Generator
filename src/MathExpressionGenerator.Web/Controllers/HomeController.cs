@@ -1,14 +1,15 @@
-﻿using MathExpressionGenerator.Common;
-using MathExpressionGenerator.Common.Containers;
+﻿using MathExpressionGenerator.Common.Containers;
 using MathExpressionGenerator.Models.Enums;
+using MathExpressionGenerator.Models.Interfaces;
 using MathExpressionGenerator.Services.Interfaces;
 using MathExpressionGenerator.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace MathExpressionGenerator.Web.Controllers
 {
@@ -16,15 +17,21 @@ namespace MathExpressionGenerator.Web.Controllers
     {
         private readonly IExpressionExtractor expressionExtractor;
         private readonly IExpressionContainer expressionContainer;
+        private readonly IMathExpressionService mathService;
+        private readonly FileContentTypes fileContentTypes;
 
         public HomeController(
+            IOptions<FileContentTypes> fileContentTypesOptions,
             ILanguageContainer languageContainer,
             IExpressionExtractor expressionExtractor,
-            IExpressionContainer expressionContainer)
+            IExpressionContainer expressionContainer,
+            IMathExpressionService mathService)
             : base(languageContainer)
         {
+            this.fileContentTypes = fileContentTypesOptions.Value;
             this.expressionExtractor = expressionExtractor;
             this.expressionContainer = expressionContainer;
+            this.mathService = mathService;
         }
         
         [HttpGet]
@@ -67,22 +74,50 @@ namespace MathExpressionGenerator.Web.Controllers
 
                 return View(model);
             }
+            var chosenExpressionType = Assembly
+                .GetAssembly(typeof(IMathExpression))
+                .GetType(model.ChosenExpressionType);
 
-            // add to result container
-            
+            var mathExpressions = this.mathService.GenerateMathExpressions(
+                chosenExpressionType,
+                model.OperandMinValue,
+                model.OperandMaxValue,
+                model.ExpressionsCount,
+                model.ShouldRandomize);
+
+            if (mathExpressions.Any())
+            {
+                this.expressionContainer.Add(mathExpressions);
+            }
+
             return View(model);
         }
 
         [HttpGet]
         public IActionResult Clear()
         {
-            throw new NotImplementedException();
+            this.expressionContainer.Clear();
+
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
-        public IActionResult Download(string fileExtension = ".txt")
+        public async Task Download()
         {
-            throw new NotImplementedException();
+            var fileBytes = this.expressionContainer.GetExpressionsAsBytes().ToArray();
+            var contentType = this.fileContentTypes[".txt"];
+            var fileName = CurrentLanguage.ExpressionsFileName;
+
+            if (fileBytes.Length == 0)
+            {
+                return;
+            }
+
+            var response = this.ControllerContext.HttpContext.Response;
+            response.ContentType = contentType;
+            response.Headers.Add("content-disposition", $"attachment; filename=math-expressions.txt");
+
+            await response.Body.WriteAsync(fileBytes);
         }
     }
 }

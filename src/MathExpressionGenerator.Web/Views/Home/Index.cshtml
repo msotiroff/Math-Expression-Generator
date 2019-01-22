@@ -3,6 +3,7 @@
     var lang = BaseController.CurrentLanguage;
     var errorsHidden = Model.ShowErrors ? "" : "hidden";
 }
+@inject IExpressionContainer expressionContainer;
 <hr />
 <div class="container row">
     <div class="col-md-4">
@@ -17,6 +18,7 @@
                         asp-items="Model.AllExpressionOperations"
                         onchange="reload(this.value)"
                         class="form-control"></select>
+                <span hidden id="divisionAlertBox" class="text-warning">@lang.DivisionWarningMessage</span>
             </div>
             <div class="form-group">
                 <label class="control-label">@lang.ChooseExpressionType</label>
@@ -50,16 +52,14 @@
                     </label>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">@lang.SaveAs</label>
-                <select asp-for="FileExtensionSelected" asp-items="@Model.SaveAsOptions" class="form-control"></select>
-            </div>
-            <div class="form-group pull-left">
+            @*<div class="form-group pull-left">
                 <a asp-area=""
                    asp-controller="home"
                    asp-action="download"
                    class="btn btn-success"
-                   asp-route-fileExtension="@Model.FileExtensionSelected">@lang.Save</a>
+                   asp-route-fileExtension="@Model.FileExtensionSelected">@lang.Save</a>*@
+            <div class="form-group pull-left">
+                <div class="btn btn-success" onclick="download()">@lang.Save</div>
             </div>
             <div class="form-group pull-right">
                 <a asp-area="" asp-controller="home" asp-action="clear" class="btn btn-warning">@lang.Clear</a>
@@ -67,16 +67,30 @@
             </div>
         </form>
     </div>
-    <div class="col-sm-4 col-md-8">
+    <div class="col-sm-12 col-md-8">
         <br />
-        <textarea asp-for="Result" rows="23" class="form-control" readonly></textarea>
+        <textarea rows="14" class="form-control text-large" readonly>@expressionContainer.GetExpressionsAsString()</textarea>
     </div>
 </div>
 
 @section Scripts {
-    <script>
+    <script charset="utf-8">
         function reload(dropDownValue) {
             window.location.href = '/home/index?expressionOperation=' + dropDownValue;
         }
+
+        function download() {
+            window.location.href = '/home/download';
+        }
+
+        $(document).ready(function () {
+            let mathOperation = $('#ChosenExpressionOperation').val();
+            let divisionAlertBox = document.getElementById('divisionAlertBox');
+            if (mathOperation === 'Division') {
+                $('#divisionAlertBox').fadeIn();
+            } else {
+                $('#divisionAlertBox').fadeOut();
+            }
+        });        
     </script>
 }
