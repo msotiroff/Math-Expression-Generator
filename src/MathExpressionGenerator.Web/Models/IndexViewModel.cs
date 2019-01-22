@@ -43,9 +43,7 @@ namespace MathExpressionGenerator.Web.Models
         public bool ShouldRandomize { get; set; }
         
         public string Result { get; set; }
-
-        public bool ShowErrors { get; set; }
-
+        
         public void InitializeSelectLists(
             IEnumerable<ExpressionViewModel> expressions,
             ILanguage language)

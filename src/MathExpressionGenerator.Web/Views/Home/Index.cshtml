@@ -1,7 +1,6 @@
 ﻿@model MathExpressionGenerator.Web.Models.IndexViewModel
 @{
     var lang = BaseController.CurrentLanguage;
-    var errorsHidden = Model.ShowErrors ? "" : "hidden";
 }
 @inject IExpressionContainer expressionContainer;
 <hr />
@@ -29,21 +28,14 @@
             <div class="form-group">
                 <label class="control-label">@lang.ChooseMinOperand</label>
                 <input asp-for="OperandMinValue" class="form-control" maxlength="10" />
-                <div class="text-danger" @errorsHidden>@lang.InvalidNumberMinValueErrorMsg</div>
-                <div class="text-danger" @errorsHidden>@lang.InvalidNumberMaxValueErrorMsg</div>
-                <div class="text-danger" @errorsHidden>@lang.InvalidDifferenceMinMaxValue</div>
             </div>
             <div class="form-group">
                 <label class="control-label">@lang.ChooseMaxOperand</label>
                 <input asp-for="OperandMaxValue" class="form-control" maxlength="10" />
-                <div class="text-danger" @errorsHidden>@lang.InvalidNumberMinValueErrorMsg</div>
-                <div class="text-danger" @errorsHidden>@lang.InvalidNumberMaxValueErrorMsg</div>
-                <div class="text-danger" @errorsHidden>@lang.InvalidDifferenceMinMaxValue</div>
             </div>
             <div class="form-group">
                 <label class="control-label">@lang.ExpressionsCount</label>
                 <input asp-for="ExpressionsCount" class="form-control" maxlength="5" />
-                <span class="text-danger" @errorsHidden>@lang.MaxCountOfExpressionsExceeded</span>
             </div>
             <div class="form-group">
                 <div class="checkbox">
@@ -52,12 +44,10 @@
                     </label>
                 </div>
             </div>
-            @*<div class="form-group pull-left">
-                <a asp-area=""
-                   asp-controller="home"
-                   asp-action="download"
-                   class="btn btn-success"
-                   asp-route-fileExtension="@Model.FileExtensionSelected">@lang.Save</a>*@
+            <div hidden id="minOperandAlertBox" class="text-danger">@lang.InvalidNumberMinValueErrorMsg</div>
+            <div hidden id="maxOperandAlertBox" class="text-danger">@lang.InvalidNumberMaxValueErrorMsg</div>
+            <div hidden id="countOperandAlertBox" class="text-danger">@lang.MaxCountOfExpressionsExceeded</div>
+            <div hidden id="differenceAlertBox" class="text-danger">@lang.InvalidDifferenceMinMaxValue</div>
             <div class="form-group pull-left">
                 <div class="btn btn-success" onclick="download();">@lang.Save</div>
             </div>
@@ -91,6 +81,33 @@
             } else {
                 $('#divisionAlertBox').fadeOut();
             }
-        });        
+
+        let operandMin = $('#OperandMinValue').val();
+            if (operandMin < @Constants.OperandMinValue) {
+                $('#minOperandAlertBox').fadeIn();
+            } else {
+                $('#minOperandAlertBox').fadeOut();
+            }
+
+            let operandMax = $('#OperandMaxValue').val();
+            if (operandMax > @Constants.OperandMaxValue) {
+                $('#maxOperandAlertBox').fadeIn();
+            } else {
+                $('#maxOperandAlertBox').fadeOut();
+            }
+
+            let expressionsCount = $('#ExpressionsCount').val();
+            if (expressionsCount > @Constants.ExpressionsCountMaxValue) {
+                $('#countOperandAlertBox').fadeIn();
+            } else {
+                $('#countOperandAlertBox').fadeOut();
+            }
+
+            if (operandMin > operandMax) {
+                $('#differenceAlertBox').fadeIn();
+            } else {
+                $('#differenceAlertBox').fadeOut();
+            }
+        });
     </script>
 }

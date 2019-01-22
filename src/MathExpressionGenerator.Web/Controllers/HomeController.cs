@@ -59,7 +59,6 @@ namespace MathExpressionGenerator.Web.Controllers
         [HttpPost]
         public IActionResult Index(IndexViewModel model)
         {
-            model.ShowErrors = false;
             model.InitializeSelectLists(
                 this.expressionExtractor
                     .Extract(new List<ExpressionOperation>
@@ -70,8 +69,6 @@ namespace MathExpressionGenerator.Web.Controllers
 
             if (!this.ModelState.IsValid)
             {
-                model.ShowErrors = true;
-
                 return View(model);
             }
             var chosenExpressionType = Assembly
