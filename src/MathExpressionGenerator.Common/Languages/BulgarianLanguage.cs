@@ -32,7 +32,7 @@
                
         public override string InvalidNumberMinValueErrorMsg => $"Минимално допустимата стойност на операнд е \"{Constants.OperandMinValue}\"";
                
-        public override string InvalidNumberMaxValueErrorMsg => $"Максимално допустимата стойност на операнд е \"{Constants.OperandMinValue}\"";
+        public override string InvalidNumberMaxValueErrorMsg => $"Максимално допустимата стойност на операнд е \"{Constants.OperandMaxValue}\"";
                
         public override string InvalidDifferenceMinMaxValue => "Максималното число трябва да бъде равно или по - голямо от минималното число!";
                
