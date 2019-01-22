@@ -16,7 +16,7 @@
                 <label class="control-label">@lang.ChooseOperationType</label>
                 <select asp-for="ChosenExpressionOperation"
                         asp-items="Model.AllExpressionOperations"
-                        onchange="reload(this.value)"
+                        onchange="reload(this.value);"
                         class="form-control"></select>
                 <span hidden id="divisionAlertBox" class="text-warning">@lang.DivisionWarningMessage</span>
             </div>
@@ -59,7 +59,7 @@
                    class="btn btn-success"
                    asp-route-fileExtension="@Model.FileExtensionSelected">@lang.Save</a>*@
             <div class="form-group pull-left">
-                <div class="btn btn-success" onclick="download()">@lang.Save</div>
+                <div class="btn btn-success" onclick="download();">@lang.Save</div>
             </div>
             <div class="form-group pull-right">
                 <a asp-area="" asp-controller="home" asp-action="clear" class="btn btn-warning">@lang.Clear</a>
