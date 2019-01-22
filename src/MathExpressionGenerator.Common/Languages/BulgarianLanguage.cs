@@ -57,7 +57,7 @@
             "ако генерирате уравнения с деление без остатък.";
 
         public override string MaxCountOfExpressionsExceeded
-            => $"Максималния брой изрази на всяко генериране е {Constants.ExpressionsCountMaxValue}.";
+            => $"Максималния брой изрази за всяко генериране е {Constants.ExpressionsCountMaxValue}.";
 
         public override string ToString() => "Български";
     }
