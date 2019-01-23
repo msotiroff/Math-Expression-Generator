@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MathExpressionGenerator.Web.Attribute
+namespace MathExpressionGenerator.Web.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class EqualOrGreaterThanAttribute : ValidationAttribute
