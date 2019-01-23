@@ -1,7 +1,9 @@
 ﻿<!DOCTYPE html>
 <html>
+@inject LambdaOptions lambdaOptions;
 @{
     var languageContainer = this.Context.RequestServices.GetRequiredService<ILanguageContainer>();
+    var faviconUrl = lambdaOptions.FaviconPath;
 }
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
@@ -18,7 +20,8 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="icon" type="image/x-icon" href="@faviconUrl" />
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">

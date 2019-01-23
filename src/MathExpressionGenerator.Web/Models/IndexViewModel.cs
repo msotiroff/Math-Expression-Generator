@@ -2,7 +2,7 @@
 using MathExpressionGenerator.Common.Languages;
 using MathExpressionGenerator.Common.ViewModels;
 using MathExpressionGenerator.Models.Enums;
-using MathExpressionGenerator.Web.Attribute;
+using MathExpressionGenerator.Web.Attributes;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;

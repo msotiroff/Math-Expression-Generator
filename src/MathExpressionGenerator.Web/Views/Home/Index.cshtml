@@ -3,7 +3,9 @@
     var lang = BaseController.CurrentLanguage;
 }
 @inject IExpressionContainer expressionContainer;
+@inject LambdaOptions lambdaOptions;
 <hr />
+<span id="baseUrl" hidden>@lambdaOptions.ApplicationBasePath</span>
 <div class="container row">
     <div class="col-md-4">
 
@@ -65,12 +67,14 @@
 
 @section Scripts {
     <script charset="utf-8">
+        let baseUrl = (document).getElementById('baseUrl').innerText;
+
         function reload(dropDownValue) {
-            window.location.href = '/home/index?expressionOperation=' + dropDownValue;
+            window.location.href = baseUrl + '/home/index?expressionOperation=' + dropDownValue;
         }
 
         function download() {
-            window.location.href = '/home/download';
+            window.location.href = baseUrl + '/home/download';
         }
 
         $(document).ready(function () {

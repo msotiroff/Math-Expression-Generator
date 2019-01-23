@@ -2,6 +2,7 @@
 using MathExpressionGenerator.Models.Enums;
 using MathExpressionGenerator.Models.Interfaces;
 using MathExpressionGenerator.Services.Interfaces;
+using MathExpressionGenerator.Web.Configuration;
 using MathExpressionGenerator.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -9,18 +10,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace MathExpressionGenerator.Web.Controllers
 {
     public class HomeController : BaseController
     {
+        private readonly LambdaOptions lambdaOptions;
         private readonly IExpressionExtractor expressionExtractor;
         private readonly IExpressionContainer expressionContainer;
         private readonly IMathExpressionService mathService;
         private readonly FileContentTypes fileContentTypes;
 
         public HomeController(
+            LambdaOptions lambdaOptions,
             IOptions<FileContentTypes> fileContentTypesOptions,
             ILanguageContainer languageContainer,
             IExpressionExtractor expressionExtractor,
@@ -28,6 +30,7 @@ namespace MathExpressionGenerator.Web.Controllers
             IMathExpressionService mathService)
             : base(languageContainer)
         {
+            this.lambdaOptions = lambdaOptions;
             this.fileContentTypes = fileContentTypesOptions.Value;
             this.expressionExtractor = expressionExtractor;
             this.expressionContainer = expressionContainer;
@@ -99,22 +102,18 @@ namespace MathExpressionGenerator.Web.Controllers
         }
 
         [HttpGet]
-        public async Task Download()
+        public IActionResult Download()
         {
             var fileBytes = this.expressionContainer.GetExpressionsAsBytes().ToArray();
             var contentType = this.fileContentTypes[".txt"];
-            var fileName = CurrentLanguage.ExpressionsFileName;
+            var fileName = $"{CurrentLanguage.ExpressionsFileName}.txt";
 
             if (fileBytes.Length == 0)
             {
-                return;
+                return RedirectToAction(nameof(Index));
             }
 
-            var response = this.ControllerContext.HttpContext.Response;
-            response.ContentType = contentType;
-            response.Headers.Add("content-disposition", $"attachment; filename=math-expressions.txt");
-
-            await response.Body.WriteAsync(fileBytes);
+            return File(fileBytes, contentType, fileName);
         }
     }
 }
