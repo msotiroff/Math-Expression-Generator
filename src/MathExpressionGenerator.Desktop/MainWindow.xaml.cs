@@ -318,26 +318,26 @@
 
         private void ChkBoxPowering_Checked(object sender, RoutedEventArgs e)
         {
-            this.checkedOperations.Add(ExpressionOperation.Powering);
-            this.InitializeExpressionTypes();
+            //this.checkedOperations.Add(ExpressionOperation.Powering);
+            //this.InitializeExpressionTypes();
         }
 
         private void ChkBoxPowering_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.checkedOperations.Remove(ExpressionOperation.Powering);
-            this.InitializeExpressionTypes();
+            //this.checkedOperations.Remove(ExpressionOperation.Powering);
+            //this.InitializeExpressionTypes();
         }
 
         private void ChkBoxRooting_Checked(object sender, RoutedEventArgs e)
         {
-            this.checkedOperations.Add(ExpressionOperation.SquareRooting);
-            this.InitializeExpressionTypes();
+            //this.checkedOperations.Add(ExpressionOperation.SquareRooting);
+            //this.InitializeExpressionTypes();
         }
 
         private void ChkBoxRooting_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.checkedOperations.Remove(ExpressionOperation.SquareRooting);
-            this.InitializeExpressionTypes();
+            //this.checkedOperations.Remove(ExpressionOperation.SquareRooting);
+            //this.InitializeExpressionTypes();
         }
 
         private void ChkBoxMultiplication_Unchecked(object sender, RoutedEventArgs e)

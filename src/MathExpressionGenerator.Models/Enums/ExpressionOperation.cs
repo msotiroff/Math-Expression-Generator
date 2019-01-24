@@ -6,7 +6,7 @@
         Subtraction,
         Multiplication,
         Division,
-        Powering,
-        SquareRooting
+        //Powering,
+        //SquareRooting
     }
 }
