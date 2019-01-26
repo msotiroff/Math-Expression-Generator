@@ -4,11 +4,13 @@
 }
 @inject IExpressionContainer expressionContainer;
 @inject LambdaOptions lambdaOptions;
-<hr />
-<span id="baseUrl" hidden>@lambdaOptions.ApplicationBasePath</span>
-<div class="container row">
-    <div class="col-md-4">
 
+<br />
+<br />
+<br />
+<span id="baseUrl" hidden>@lambdaOptions.ApplicationBasePath</span>
+<div class="container row index-container">
+    <div class="col-md-4">
         <form asp-area="" asp-controller="home" asp-action="Index" method="post">
             <input asp-for="AllExpressionTypes" readonly hidden="hidden" />
             <input asp-for="AllExpressionOperations" readonly hidden="hidden" />
@@ -63,20 +65,21 @@
         <br />
         <textarea rows="14" class="form-control text-large" readonly>@expressionContainer.GetExpressionsAsString()</textarea>
     </div>
+    <div>
+        <br />
+    </div>
 </div>
 
 @section Scripts {
-    <script charset="utf-8">
+    <script>
         let baseUrl = (document).getElementById('baseUrl').innerText;
-
         function reload(dropDownValue) {
             window.location.href = baseUrl + '/home/index?expressionOperation=' + dropDownValue;
         }
-
         function download() {
+            showAnimatedArrow();
             window.location.href = baseUrl + '/home/download';
         }
-
         $(document).ready(function () {
             let mathOperation = $('#ChosenExpressionOperation').val();
             let divisionAlertBox = document.getElementById('divisionAlertBox');
@@ -86,28 +89,25 @@
                 $('#divisionAlertBox').fadeOut();
             }
 
-        let operandMin = $('#OperandMinValue').val();
-            if (operandMin < @Constants.OperandMinValue) {
-                $('#minOperandAlertBox').fadeIn();
+            let operandMin = $('#OperandMinValue').val();
+            if (parseInt(operandMin) < @Constants.OperandMinValue) {
+            $('#minOperandAlertBox').fadeIn();
             } else {
                 $('#minOperandAlertBox').fadeOut();
             }
-
             let operandMax = $('#OperandMaxValue').val();
-            if (operandMax > @Constants.OperandMaxValue) {
+            if (parseInt(operandMax) > @Constants.OperandMaxValue) {
                 $('#maxOperandAlertBox').fadeIn();
             } else {
                 $('#maxOperandAlertBox').fadeOut();
             }
-
             let expressionsCount = $('#ExpressionsCount').val();
-            if (expressionsCount > @Constants.ExpressionsCountMaxValue) {
+            if (parseInt(expressionsCount) > @Constants.ExpressionsCountMaxValue) {
                 $('#countOperandAlertBox').fadeIn();
             } else {
                 $('#countOperandAlertBox').fadeOut();
             }
-
-            if (operandMin > operandMax) {
+            if (parseInt(operandMin) > parseInt(operandMax)) {
                 $('#differenceAlertBox').fadeIn();
             } else {
                 $('#differenceAlertBox').fadeOut();

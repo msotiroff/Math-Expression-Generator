@@ -11,12 +11,6 @@
     <None Remove="wwwroot\images\**" />
   </ItemGroup>
   <ItemGroup>
-    <Content Remove="wwwroot\favicon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="wwwroot\favicon.ico" />
-  </ItemGroup>
-  <ItemGroup>
 	<PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="2.1.0" />
   <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0" />
   <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />

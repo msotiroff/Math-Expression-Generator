@@ -31,7 +31,7 @@ namespace MathExpressionGenerator.Web.Controllers
             if (CurrentLanguage == null)
             {
                 CurrentLanguage = this.languageContainer
-                    .Get(typeof(EnglishLanguage));
+                    .Get(typeof(BulgarianLanguage));
             }
         }
     }

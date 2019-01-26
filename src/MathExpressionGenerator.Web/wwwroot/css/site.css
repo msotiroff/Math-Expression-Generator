@@ -1,10 +1,20 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+    background-size: cover;
 }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
+.index-container {
+    background-color: #E5E5E5;
+    border-radius: 6px 6px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -20,10 +30,31 @@ body {
 
 textarea {
     resize: none;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
 }
 
 .text-large {
     font-size: 150% !important
+}
+
+@keyframes showAndHide {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.hideOnStart {
+    opacity: 0;
 }
 
 /* Carousel */
