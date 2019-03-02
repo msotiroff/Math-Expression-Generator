@@ -1,3 +1,5 @@
+using ErrorLogger.Extensions;
+using MathExpressionGenerator.Common;
 using MathExpressionGenerator.Common.Containers;
 using MathExpressionGenerator.Models.Factories.Implementations;
 using MathExpressionGenerator.Models.Factories.Interfaces;
@@ -48,9 +50,14 @@ namespace MathExpressionGenerator.Web
             services.AddTransient<IMathExpressionFactory, MathExpressionFactory>();
             services.AddTransient<IFileService, FileService>();
             
-            services.AddTransient<Random>(sp => new Random());
-            services.AddTransient<StringBuilder>(sp => new StringBuilder());
-
+            services.AddTransient(sp => new Random());
+            services.AddTransient(sp => new StringBuilder());
+            
+            services.AddErrorLogger(opt => 
+            {
+                opt.ErrorLoggerUrl = Secrets.ErrorLogServiceUrl;
+            });
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

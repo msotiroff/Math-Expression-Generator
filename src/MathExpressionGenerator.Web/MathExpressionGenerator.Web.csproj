@@ -11,6 +11,12 @@
     <None Remove="wwwroot\images\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="SDK\ErrorLogger.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SDK\ErrorLogger.dll" />
+  </ItemGroup>
+  <ItemGroup>
 	<PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="2.1.0" />
   <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0" />
   <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
@@ -19,5 +25,10 @@
     <ProjectReference Include="..\MathExpressionGenerator.Common\MathExpressionGenerator.Common.csproj" />
     <ProjectReference Include="..\MathExpressionGenerator.Models\MathExpressionGenerator.Models.csproj" />
     <ProjectReference Include="..\MathExpressionGenerator.Services\MathExpressionGenerator.Services.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ErrorLogger">
+      <HintPath>SDK\ErrorLogger.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
