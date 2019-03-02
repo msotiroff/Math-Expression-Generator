@@ -18,8 +18,8 @@ namespace MathExpressionGenerator.Models.Expressions.Еquations.Addition
             this.d = this.a + this.b + this.c;
         }
         
-        public override string InstanceRepresentation => $"{a} + {b} + {c} = {Constants.EmptyBox}";
+        public override string InstanceRepresentation => $"{a} + {b} + {c} = {Constants.VariableSymbol}";
 
-        public override string TypeRepresentation => $"a + b + c = {Constants.EmptyBox}";
+        public override string TypeRepresentation => $"a + b + c = {Constants.VariableSymbol}";
     }
 }

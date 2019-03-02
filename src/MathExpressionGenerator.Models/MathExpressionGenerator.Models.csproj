@@ -85,6 +85,7 @@
     <Compile Include="Expressions\Еquations\Multiplication\Multiplication_2v3.cs" />
     <Compile Include="Expressions\Еquations\Multiplication\Multiplication_2v1.cs" />
     <Compile Include="Expressions\Еquations\Multiplication\Multiplication_3v1.cs" />
+    <Compile Include="Interfaces\IHaveVariableOperands.cs" />
     <Compile Include="Interfaces\IMathExpression.cs" />
     <Compile Include="Interfaces\IRepresentable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

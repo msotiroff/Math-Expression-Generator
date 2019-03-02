@@ -17,8 +17,8 @@
             this.result = this.a - this.b;
         }
         
-        public override string InstanceRepresentation => $"{Constants.EmptyBox} - {b} = {result}";
+        public override string InstanceRepresentation => $"{Constants.VariableSymbol} - {b} = {result}";
 
-        public override string TypeRepresentation => $"{Constants.EmptyBox} - b = c";
+        public override string TypeRepresentation => $"{Constants.VariableSymbol} - b = c";
     }
 }

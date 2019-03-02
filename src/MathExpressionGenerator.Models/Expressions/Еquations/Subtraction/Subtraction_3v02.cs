@@ -1,10 +1,11 @@
 ﻿namespace MathExpressionGenerator.Models.Expressions.Еquations.Subtraction
 {
     using MathExpressionGenerator.Common;
+    using MathExpressionGenerator.Models.Interfaces;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Subtraction_3v02 : BaseSubtractionEquation
+    public class Subtraction_3v02 : BaseSubtractionEquation, IHaveVariableOperands
     {
         private readonly IList<int> orderedArguments;
         private readonly int a;
@@ -23,8 +24,8 @@
             this.result = this.a + this.b - this.c;
         }
         
-        public override string InstanceRepresentation => $"{a} + {Constants.EmptyBox} - {c} = {result}";
+        public override string InstanceRepresentation => $"{a} + {Constants.VariableSymbol} - {c} = {result}";
 
-        public override string TypeRepresentation => $"a + {Constants.EmptyBox} - c = d";
+        public override string TypeRepresentation => $"a + {Constants.VariableSymbol} - c = d";
     }
 }
