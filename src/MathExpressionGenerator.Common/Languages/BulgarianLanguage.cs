@@ -3,7 +3,9 @@
     public class BulgarianLanguage : BaseLanguage
     {
         public override string ChooseExpressionType => "Изберете вид израз:";
-               
+
+        public override string ChooseVariableSymbol => "Символ променлива";
+
         public override string ChooseOperationType => "Изберете операция:";
                
         public override string ChooseMinOperand => "Минимален операнд:";
@@ -28,13 +30,17 @@
                
         public override string ExpressionsFileName => "Уравнения";
                
-        public override string InvalidNumberFormatErrorMsg => "\"{0}\" не е валидно число.";
+        public override string InvalidNumberFormatErrorMsg => 
+            "\"{0}\" не е валидно число.";
                
-        public override string InvalidNumberMinValueErrorMsg => $"Минимално допустимата стойност на операнд е \"{Constants.OperandMinValue}\"";
+        public override string InvalidNumberMinValueErrorMsg => 
+            $"Минимално допустимата стойност на операнд е \"{Constants.OperandMinValue}\"";
                
-        public override string InvalidNumberMaxValueErrorMsg => $"Максимално допустимата стойност на операнд е \"{Constants.OperandMaxValue}\"";
+        public override string InvalidNumberMaxValueErrorMsg => 
+            $"Максимално допустимата стойност на операнд е \"{Constants.OperandMaxValue}\"";
                
-        public override string InvalidDifferenceMinMaxValue => "Максималното число трябва да бъде равно или по - голямо от минималното число!";
+        public override string InvalidDifferenceMinMaxValue => 
+            "Максималното число трябва да бъде равно или по - голямо от минималното число!";
                
         public override string Language => "Език:";
                
@@ -56,8 +62,12 @@
             => "Внимание: Минималната и максималната стойност на операндите може да вариара, " +
             "ако генерирате уравнения с деление без остатък.";
 
+        public override string OperandVaryWarningMessage
+            => "Внимание: Операндите може да варират при този вид израз.";
+
         public override string MaxCountOfExpressionsExceeded
-            => $"Максималния брой изрази за всяко генериране е {Constants.ExpressionsCountMaxValue}.";
+            => $"Максималния брой изрази за всяко генериране " +
+            $"е {Constants.ExpressionsCountMaxValue}.";
 
         public override string ToString() => "Български";
     }

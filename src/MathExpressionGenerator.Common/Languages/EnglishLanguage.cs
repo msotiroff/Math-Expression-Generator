@@ -4,6 +4,8 @@
     {
         public override string ChooseExpressionType => "Choose Expression Type:";
 
+        public override string ChooseVariableSymbol => "Choose a variable symbol";
+
         public override string ChooseOperationType => "Choose Operation:";
 
         public override string ChooseMinOperand => "Choose Min Operand:";
@@ -28,13 +30,17 @@
 
         public override string ExpressionsFileName => "Math expressions";
 
-        public override string InvalidNumberFormatErrorMsg => "\"{0}\" is not a valid number!";
+        public override string InvalidNumberFormatErrorMsg => 
+            "\"{0}\" is not a valid number!";
 
-        public override string InvalidNumberMinValueErrorMsg => $"Smallest possible operand's value is \"{Constants.OperandMinValue}\"";
+        public override string InvalidNumberMinValueErrorMsg => 
+            $"Smallest possible operand's value is \"{Constants.OperandMinValue}\"";
 
-        public override string InvalidNumberMaxValueErrorMsg => $"Largest possible operand's value is \"{Constants.OperandMaxValue}\"";
+        public override string InvalidNumberMaxValueErrorMsg => 
+            $"Largest possible operand's value is \"{Constants.OperandMaxValue}\"";
 
-        public override string InvalidDifferenceMinMaxValue => "Min number should be equal or less than Max number!";
+        public override string InvalidDifferenceMinMaxValue => 
+            "Min number should be equal or less than Max number!";
 
         public override string Language => "Language:";
 
@@ -53,10 +59,15 @@
         public override string SquareRooting => "Square rooting";
 
         public override string DivisionWarningMessage 
-            => "Warning: The min and max operand may vary, if you generate a division without overage.";
+            => "Warning: The min and max operand may vary, " +
+            "if you generate a division without overage.";
+
+        public override string OperandVaryWarningMessage
+            => "Warning: The operands may vary for this expression type.";
 
         public override string MaxCountOfExpressionsExceeded 
-            => $"Max expressions count per singe generation is {Constants.ExpressionsCountMaxValue}.";
+            => $"Max expressions count per singe generation " +
+            $"is {Constants.ExpressionsCountMaxValue}.";
         
         public override string ToString() => "English";
     }

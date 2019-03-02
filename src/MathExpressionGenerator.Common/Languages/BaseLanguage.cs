@@ -5,6 +5,7 @@ namespace MathExpressionGenerator.Common.Languages
     public abstract class BaseLanguage : ILanguage
     {
         public abstract string ChooseExpressionType { get; }
+        public abstract string ChooseVariableSymbol { get; }
         public abstract string ChooseOperationType { get; }
         public abstract string ChooseMinOperand { get; }
         public abstract string ChooseMaxOperand { get; }
@@ -30,6 +31,7 @@ namespace MathExpressionGenerator.Common.Languages
         public abstract string Powering { get; }
         public abstract string SquareRooting { get; }
         public abstract string DivisionWarningMessage { get; }
+        public abstract string OperandVaryWarningMessage { get; }
         public abstract string MaxCountOfExpressionsExceeded { get; }
 
         public string GetPropertyValue(string propertyName)

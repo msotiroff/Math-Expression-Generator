@@ -3,6 +3,7 @@
     public interface ILanguage
     {
         string ChooseExpressionType { get; }
+        string ChooseVariableSymbol { get; }
         string ChooseOperationType { get; }
         string ChooseMinOperand { get; }
         string ChooseMaxOperand { get; }
@@ -28,6 +29,7 @@
         string Powering { get; }
         string SquareRooting { get; }
         string DivisionWarningMessage { get; }
+        string OperandVaryWarningMessage { get; }
         string MaxCountOfExpressionsExceeded { get; }
 
         string GetPropertyValue(string propertyName);
