@@ -329,3 +329,4 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 /src/MathExpressionGenerator.Web/aws-lambda-tools-defaults.json
+/src/MathExpressionGenerator.Common/Secrets.cs
