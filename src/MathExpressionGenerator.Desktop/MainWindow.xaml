@@ -14,7 +14,9 @@
         KeyDown="OnEnterPressed">
     <Grid Name="MainGrid">
         <Label Name="lblChooseExpression" Content="Choose an expression type:" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="19,16,0,0" VerticalAlignment="Top" Height="35" Width="220"/>
-        <ComboBox x:Name="comboBoxExpressionType" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="16" Margin="263,20,0,0" VerticalAlignment="Top" Width="300" Height="35"/>
+        <ComboBox x:Name="comboBoxExpressionType" SelectionChanged="ComboBoxExpressionType_SelectionChanged" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="16" Margin="263,20,0,0" VerticalAlignment="Top" Width="300" Height="35"/>
+        <Label Name="lblChooseVariable" Content="Choose a variable symbol:" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="19,75,0,0" VerticalAlignment="Top" Height="35" Width="220"/>
+        <ComboBox x:Name="comboBoxVariableSymbol" SelectionChanged="ComboBoxVariableSymbol_SelectionChanged"  HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="16" Margin="263,75,0,0" VerticalAlignment="Top" Width="50" Height="35"/>
         <TextBox Name="txtBoxResults" IsReadOnly="True" FontSize="18" Background="LightGray" HorizontalAlignment="Left" Height="321" Margin="588,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320"/>
         <Label Name="lblChooseMinNum" Content="Choose min number:" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="19,126,0,0" VerticalAlignment="Top" Height="35" Width="220"/>
         <TextBox x:Name="txtBoxMinNumber" MaxLength="19" TextChanged="ValidateNumbers" FontSize="16" HorizontalAlignment="Left" Height="35" VerticalContentAlignment="Center" Margin="263,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
@@ -41,11 +43,9 @@
         <Button Cursor="Hand" Name="btnClear" Content="Clear" Background="CornflowerBlue" FontSize="22" HorizontalAlignment="Left" Margin="348,296,0,0" VerticalAlignment="Top" Width="94" Height="44" Click="ClearButton_Click"/>
         <Label Name="lblLanguage" Content="Language:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="31,302,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.448,0.219" Width="67"/>
         <ComboBox Name="comboBoxLang" SelectionChanged="ComboBoxLang_SelectionChanged" HorizontalAlignment="Left" Margin="101,305,0,0" VerticalAlignment="Top" Width="111"/>
-        <CheckBox Cursor="Hand" Name="chkBoxAddition" Content="Addition" HorizontalAlignment="Left" Margin="80,76,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxAddition_Unchecked" Checked="ChkBoxAddition_Checked"/>
-        <CheckBox Cursor="Hand" Name="chkBoxSubtraction" Content="Subtraction" HorizontalAlignment="Left" Margin="80,96,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxSubtraction_Unchecked" Checked="ChkBoxSubtraction_Checked"/>
-        <CheckBox Cursor="Hand" Name="chkBoxMultiplication" Content="Multiplication" HorizontalAlignment="Left" Margin="200,76,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxMultiplication_Unchecked" Checked="ChkBoxMultiplication_Checked"/>
-        <CheckBox Cursor="Hand" Name="chkBoxDivision" Content="Division" HorizontalAlignment="Left" Margin="200,96,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxDivision_Unchecked" Checked="ChkBoxDivision_Checked"/>
-        <CheckBox Cursor="Hand" Name="chkBoxPowering" Content="Powering" HorizontalAlignment="Left" Margin="320,76,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxPowering_Unchecked" Checked="ChkBoxPowering_Checked"/>
-        <CheckBox Cursor="Hand" Name="chkBoxRooting" Content="Square rooting" HorizontalAlignment="Left" Margin="320,96,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxRooting_Unchecked" Checked="ChkBoxRooting_Checked"/>
+        <CheckBox Cursor="Hand" Name="chkBoxAddition" Content="Addition" HorizontalAlignment="Left" Margin="330,76,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxAddition_Unchecked" Checked="ChkBoxAddition_Checked"/>
+        <CheckBox Cursor="Hand" Name="chkBoxSubtraction" Content="Subtraction" HorizontalAlignment="Left" Margin="330,96,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxSubtraction_Unchecked" Checked="ChkBoxSubtraction_Checked"/>
+        <CheckBox Cursor="Hand" Name="chkBoxMultiplication" Content="Multiplication" HorizontalAlignment="Left" Margin="455,76,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxMultiplication_Unchecked" Checked="ChkBoxMultiplication_Checked"/>
+        <CheckBox Cursor="Hand" Name="chkBoxDivision" Content="Division" HorizontalAlignment="Left" Margin="455,96,0,0" VerticalAlignment="Top" Height="18" Width="108" Unchecked="ChkBoxDivision_Unchecked" Checked="ChkBoxDivision_Checked"/>
     </Grid>
 </Window>

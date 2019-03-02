@@ -16,6 +16,7 @@
     using System.Windows.Media;
     using MathExpressionGenerator.Models.Expressions.Еquations.Division;
     using MathExpressionGenerator.Common;
+    using MathExpressionGenerator.Models.Interfaces;
 
     public partial class MainWindow : Window
     {
@@ -53,18 +54,26 @@
             this.checkedOperations = new HashSet<ExpressionOperation>();
             this.InitializeLanguages();
             this.CheckExpressionOperations();
+            this.SetInitialData();
             this.InitializeExpressionTypes();
             this.ClearAlertBox();
+        }
+
+        private void SetInitialData()
+        {
+            this.txtBoxMinNumber.Text = "1";
+            this.txtBoxMaxNumber.Text = "10";
+            this.txtBoxCount.Text = "10";
+            this.comboBoxVariableSymbol.ItemsSource = Constants.AllPossibleVarialbeSymbols;
+            this.comboBoxVariableSymbol.SelectedIndex = 0;
         }
 
         private void CheckExpressionOperations()
         {
             this.chkBoxAddition.IsChecked = true;
-            this.chkBoxSubtraction.IsChecked = true;
-            this.chkBoxMultiplication.IsChecked = true;
-            this.chkBoxDivision.IsChecked = true;
-            this.chkBoxPowering.IsChecked = true;
-            this.chkBoxRooting.IsChecked = true;
+            this.chkBoxSubtraction.IsChecked = false;
+            this.chkBoxMultiplication.IsChecked = false;
+            this.chkBoxDivision.IsChecked = false;
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -203,7 +212,7 @@
 
         private void InitializeLanguages()
         {
-            var allLangs = this.languageContainer.All().OrderBy(l => l.ToString());
+            var allLangs = this.languageContainer.All().OrderByDescending(l => l.ToString());
 
             this.comboBoxLang.ItemsSource = allLangs;
             this.comboBoxLang.SelectedIndex = 0;
@@ -280,6 +289,7 @@
             this.Title = this.currentLanguage.GeneratorTitle;
 
             this.lblChooseExpression.Content = this.currentLanguage.ChooseExpressionType;
+            this.lblChooseVariable.Content = this.currentLanguage.ChooseVariableSymbol;
             this.lblChooseMinNum.Content = this.currentLanguage.ChooseMinOperand;
             this.lblChooseMaxNum.Content = this.currentLanguage.ChooseMaxOperand;
             this.lblExprCount.Content = this.currentLanguage.ExpressionsCount;
@@ -298,8 +308,6 @@
             this.chkBoxSubtraction.Content = this.currentLanguage.Subtraction;
             this.chkBoxMultiplication.Content = this.currentLanguage.Multiplication;
             this.chkBoxDivision.Content = this.currentLanguage.Division;
-            this.chkBoxPowering.Content = this.currentLanguage.Powering;
-            this.chkBoxRooting.Content = this.currentLanguage.SquareRooting;
         }
 
         private void ChkBoxDivision_Checked(object sender, RoutedEventArgs e)
@@ -315,31 +323,7 @@
             this.checkedOperations.Remove(ExpressionOperation.Division);
             this.InitializeExpressionTypes();
         }
-
-        private void ChkBoxPowering_Checked(object sender, RoutedEventArgs e)
-        {
-            //this.checkedOperations.Add(ExpressionOperation.Powering);
-            //this.InitializeExpressionTypes();
-        }
-
-        private void ChkBoxPowering_Unchecked(object sender, RoutedEventArgs e)
-        {
-            //this.checkedOperations.Remove(ExpressionOperation.Powering);
-            //this.InitializeExpressionTypes();
-        }
-
-        private void ChkBoxRooting_Checked(object sender, RoutedEventArgs e)
-        {
-            //this.checkedOperations.Add(ExpressionOperation.SquareRooting);
-            //this.InitializeExpressionTypes();
-        }
-
-        private void ChkBoxRooting_Unchecked(object sender, RoutedEventArgs e)
-        {
-            //this.checkedOperations.Remove(ExpressionOperation.SquareRooting);
-            //this.InitializeExpressionTypes();
-        }
-
+        
         private void ChkBoxMultiplication_Unchecked(object sender, RoutedEventArgs e)
         {
             this.checkedOperations.Remove(ExpressionOperation.Multiplication);
@@ -374,6 +358,40 @@
         {
             this.checkedOperations.Remove(ExpressionOperation.Addition);
             this.InitializeExpressionTypes();
+        }
+
+        private void ComboBoxVariableSymbol_SelectionChanged(
+            object sender, SelectionChangedEventArgs e)
+        {
+            var symbol = this.comboBoxVariableSymbol.SelectedItem as string;
+            Constants.VariableSymbol = symbol;
+
+            this.InitializeExpressionTypes();
+        }
+
+        private void ComboBoxExpressionType_SelectionChanged(
+            object sender, SelectionChangedEventArgs e)
+        {
+            var selectedExpression = (ExpressionViewModel)this.comboBoxExpressionType.SelectedItem;
+
+            if (selectedExpression == null)
+            {
+                this.ClearAlertBox();
+
+                return;
+            }
+
+            var hasVariableOperands = 
+                typeof(IHaveVariableOperands).IsAssignableFrom(selectedExpression.Type);
+
+            if (!hasVariableOperands)
+            {
+                this.ClearAlertBox();
+
+                return;
+            }
+
+            this.SetAlertBox(this.currentLanguage.OperandVaryWarningMessage, Brushes.Orange);
         }
     }
 }
