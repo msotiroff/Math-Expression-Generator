@@ -8,11 +8,7 @@ namespace MathExpressionGenerator.Models.Expressions.Еquations.Multiplication
         private readonly int a;
         private readonly int b;
         private readonly int result;
-
-        public Multiplication_2v2() : this(0, 0)
-        {
-        }
-
+        
         public Multiplication_2v2(int a, int b)
         {
             this.a = a;
@@ -23,7 +19,7 @@ namespace MathExpressionGenerator.Models.Expressions.Еquations.Multiplication
 
         public override ExpressionOperation Operation => ExpressionOperation.Multiplication;
 
-        public override string ObjectRepresentation => $"{Constants.EmptyBox} * {b} = {result}";
+        public override string InstanceRepresentation => $"{Constants.EmptyBox} * {b} = {result}";
 
         public override string TypeRepresentation => $"{Constants.EmptyBox} * b = c";
     }

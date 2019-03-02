@@ -1,23 +1,18 @@
 ﻿namespace MathExpressionGenerator.Models.Expressions.Еquations.Subtraction
 {
     using MathExpressionGenerator.Common;
-    using MathExpressionGenerator.Models.Enums;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Subtraction_3v3 : BaseЕquation
+    public class Subtraction_3v04 : BaseSubtractionEquation
     {
         private readonly IList<int> orderdArguments;
         private readonly int a;
         private readonly int b;
         private readonly int c;
         private readonly int result;
-
-        public Subtraction_3v3() : this(0, 0, 0)
-        {
-        }
-
-        public Subtraction_3v3(int a, int b, int c)
+        
+        public Subtraction_3v04(int a, int b, int c)
         {
             this.orderdArguments = new List<int> { a, b, c }.OrderBy(x => x).ToList();
 
@@ -27,11 +22,9 @@
 
             this.result = this.a - this.b + this.c;
         }
+        
+        public override string InstanceRepresentation => $"{a} - {Constants.EmptyBox} + {c} = {result}";
 
-        public override ExpressionOperation Operation => ExpressionOperation.Subtraction;
-
-        public override string ObjectRepresentation => $"{a} - {b} + {c} = {Constants.EmptyBox}";
-
-        public override string TypeRepresentation => $"a - b + c = {Constants.EmptyBox}";
+        public override string TypeRepresentation => $"a - {Constants.EmptyBox} + c = d";
     }
 }

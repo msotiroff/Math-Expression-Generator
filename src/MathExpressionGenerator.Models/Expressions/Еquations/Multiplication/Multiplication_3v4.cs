@@ -9,11 +9,7 @@ namespace MathExpressionGenerator.Models.Expressions.Еquations.Multiplication
         private readonly int b;
         private readonly int c;
         private readonly int result;
-
-        public Multiplication_3v4() : this(0, 0, 0)
-        {
-        }
-
+        
         public Multiplication_3v4(int a, int b, int c)
         {
             this.a = a;
@@ -25,7 +21,7 @@ namespace MathExpressionGenerator.Models.Expressions.Еquations.Multiplication
 
         public override ExpressionOperation Operation => ExpressionOperation.Multiplication;
 
-        public override string ObjectRepresentation => $"{Constants.EmptyBox} * {b} * {c} = {result}";
+        public override string InstanceRepresentation => $"{Constants.EmptyBox} * {b} * {c} = {result}";
 
         public override string TypeRepresentation => $"{Constants.EmptyBox} * b * c = d";
     }

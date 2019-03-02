@@ -8,7 +8,7 @@ namespace MathExpressionGenerator.Models.Expressions.Еquations.Division
         {
         }
 
-        public override string ObjectRepresentation => $"{Constants.EmptyBox} / {b} = {result}";
+        public override string InstanceRepresentation => $"{Constants.EmptyBox} / {b} = {result}";
 
         public override string TypeRepresentation => $"{Constants.EmptyBox} / b = c";
     }

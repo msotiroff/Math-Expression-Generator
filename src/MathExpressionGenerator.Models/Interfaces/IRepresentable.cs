@@ -4,6 +4,6 @@
     {
         string TypeRepresentation { get; }
 
-        string ObjectRepresentation { get; }
+        string InstanceRepresentation { get; }
     }
 }

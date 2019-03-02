@@ -2,24 +2,23 @@
 
 namespace MathExpressionGenerator.Models.Expressions.Еquations.Addition
 {
-    public class Addition_3v4 : BaseAdditionEquation
+    public class Addition_3v6 : BaseAdditionEquation
     {
         private readonly int a;
         private readonly int b;
         private readonly int c;
         private readonly int d;
-        
-        public Addition_3v4(int a, int b, int c)
+
+        public Addition_3v6(int a, int b, int c)
         {
             this.a = a;
             this.b = b;
             this.c = c;
-
-            this.d = this.a + this.b + this.c;
+            this.d = a + b + c;
         }
         
-        public override string InstanceRepresentation => $"{a} + {b} + {Constants.EmptyBox} = {d}";
+        public override string InstanceRepresentation => $"{a} + {Constants.EmptyBox} + {c} = {d}";
 
-        public override string TypeRepresentation => $"a + b + {Constants.EmptyBox} = d";
+        public override string TypeRepresentation => $"a + {Constants.EmptyBox} + c = d";
     }
 }

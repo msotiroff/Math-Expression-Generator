@@ -9,7 +9,7 @@
 
         public abstract ExpressionOperation Operation { get; }
 
-        public abstract string ObjectRepresentation { get; }
+        public abstract string InstanceRepresentation { get; }
 
         public abstract string TypeRepresentation { get; }
 

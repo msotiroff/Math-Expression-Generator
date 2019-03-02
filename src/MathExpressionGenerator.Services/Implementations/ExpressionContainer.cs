@@ -21,7 +21,7 @@ namespace MathExpressionGenerator.Services.Implementations
             this.stringBuilder
                     .AppendLine(string.Join(
                         Environment.NewLine,
-                        representables.Select(me => me.ObjectRepresentation)));
+                        representables.Select(me => me.InstanceRepresentation)));
         }
 
         public void Clear()
