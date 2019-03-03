@@ -15,9 +15,12 @@ namespace MathExpressionGenerator.Common
         public static IEnumerable<string> AllPossibleVarialbeSymbols =
             new List<string>
             {
+                "___",
                 "[  ]",
                 "\u0020\u20E3\u0020",
-                "X", "Y", "Z"
+                "X",
+                "Y",
+                "Z"
             };
     }
 }
