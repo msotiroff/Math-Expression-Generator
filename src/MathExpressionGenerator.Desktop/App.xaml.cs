@@ -1,9 +1,6 @@
 ﻿namespace MathExpressionGenerator.Desktop
 {
     using Common.Containers;
-    using ErrorLogger.Extensions;
-    using ErrorLogger.Interfaces;
-    using ErrorLogger.Models;
     using MathExpressionGenerator.Common;
     using Microsoft.Extensions.DependencyInjection;
     using Models.Factories.Implementations;
@@ -47,10 +44,6 @@
 
             services.AddTransient(typeof(Random), sp => new Random());
             services.AddTransient(typeof(StringBuilder), sp => new StringBuilder());
-            services.AddErrorLogger(options =>
-            {
-                options.ErrorLoggerUrl = Secrets.ErrorLogServiceUrl;
-            });
 
             return services.BuildServiceProvider();
         }
@@ -59,38 +52,9 @@
         {
             var messageBase = "Something went wrong.";
             var ex = (Exception)e.ExceptionObject;
-            var model = new ErrorServiceModel
-            {
-                Level = Level.Error,
-                Message = ex.Message,
-                Source = ex.Source,
-                StackTrace = ex.StackTrace
-            };
-            var errorLogService = this.serviceProvider.GetService<IErrorLogService>();
             var success = false;
 
-            if (errorLogService == null)
-            {
-                this.ShowMessageBoxAndExit(messageBase, success);
-            }
-
-            try
-            {
-                Task.Run(async () =>
-                {
-                    var response = await errorLogService.LogErrorAsync(model);
-                    success = response.IsSuccessStatusCode;
-                })
-                .Wait();
-            }
-            catch
-            {
-                success = false;
-            }
-            finally
-            {
-                this.ShowMessageBoxAndExit(messageBase, success);
-            }
+            this.ShowMessageBoxAndExit(messageBase, success);
         }
 
         private void ShowMessageBoxAndExit(string messageBase, bool isSuccess)
