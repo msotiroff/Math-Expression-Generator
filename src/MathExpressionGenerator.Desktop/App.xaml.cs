@@ -1,7 +1,6 @@
 ﻿namespace MathExpressionGenerator.Desktop
 {
     using Common.Containers;
-    using MathExpressionGenerator.Common;
     using Microsoft.Extensions.DependencyInjection;
     using Models.Factories.Implementations;
     using Models.Factories.Interfaces;
@@ -9,7 +8,6 @@
     using Services.Interfaces;
     using System;
     using System.Text;
-    using System.Threading.Tasks;
     using System.Windows;
 
     public partial class App : Application
