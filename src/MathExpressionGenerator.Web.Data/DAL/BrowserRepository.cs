@@ -29,27 +29,29 @@ namespace MathExpressionGenerator.Web.Data.DAL
                 return;
             }
 
-            await this.context.DeleteAsync(id, this.config);
+            Console.WriteLine($"Deleting a Browser it id: {id}...");
+
+            await this.context.DeleteAsync<Browser>(id, this.config);
         }
 
         public async Task<Browser> GetAsync(string id)
         {
-            if (id.IsNullOrWhiteSpace())
-            {
-                return default;
-            }
-
-            var browser = await this.context.LoadAsync<Browser>(id, this.config);
-
-            if (browser.IsNull())
-            {
-                browser = new Browser
+                if (id.IsNullOrWhiteSpace())
                 {
-                    Id = id
-                };
-            }
+                    return default;
+                }
 
-            return browser;
+                var browser = await this.context.LoadAsync<Browser>(id, this.config);
+
+                if (browser.IsNull())
+                {
+                    browser = new Browser
+                    {
+                        Id = id
+                    };
+                }
+
+                return browser;
         }
 
         public async Task SaveAsync(Browser browser)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Amazon.DynamoDBv2.DataModel;
+using System;
 
 namespace MathExpressionGenerator.Web.Data.Models
 {
@@ -9,6 +10,7 @@ namespace MathExpressionGenerator.Web.Data.Models
             this.Created = DateTime.UtcNow;
         }
 
+        [DynamoDBHashKey]
         public string Id { get; set; }
 
         public string CompressedExpressions { get; set; }
