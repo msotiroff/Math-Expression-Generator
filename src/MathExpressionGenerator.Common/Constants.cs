@@ -17,7 +17,7 @@ namespace MathExpressionGenerator.Common
             {
                 "___",
                 "[  ]",
-                "\u0020\u20E3\u0020",
+                //"\u0020\u20E3\u0020",
                 "X",
                 "Y",
                 "Z"

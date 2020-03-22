@@ -1,17 +1,34 @@
 ﻿namespace MathExpressionGenerator.Models.Expressions
 {
     using Interfaces;
+    using MathExpressionGenerator.Common;
     using MathExpressionGenerator.Models.Enums;
 
-    public abstract class BaseMathExpression : IMathExpression, IRepresentable
+    public class BaseMathExpression : IMathExpression, IRepresentable
     {
-        public abstract ExpressionType Type { get; }
+        private string variableSymbol;
 
-        public abstract ExpressionOperation Operation { get; }
+        public virtual ExpressionType Type { get; set; }
 
-        public abstract string InstanceRepresentation { get; }
+        public virtual ExpressionOperation Operation { get; set; }
 
-        public abstract string TypeRepresentation { get; }
+        public virtual string InstanceRepresentation { get; set; }
+
+        public virtual string TypeRepresentation { get; set; }
+
+        public string VariableSymbol 
+        { 
+            get
+            {
+                return string.IsNullOrWhiteSpace(this.variableSymbol)
+                    ? Constants.VariableSymbol
+                    : this.variableSymbol;
+            }
+            set
+            {
+                this.variableSymbol = value;
+            } 
+        }
 
         public override string ToString() => this.TypeRepresentation;
     }

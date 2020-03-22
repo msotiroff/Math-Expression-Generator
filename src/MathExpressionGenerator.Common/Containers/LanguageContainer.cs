@@ -36,7 +36,7 @@
         {
             return this.languages
                 .Values
-                .FirstOrDefault(kvp => kvp.ToString() == languageName);
+                .FirstOrDefault(lang => lang.ToString() == languageName);
         }
 
         private void InstantiateAllLanguages()

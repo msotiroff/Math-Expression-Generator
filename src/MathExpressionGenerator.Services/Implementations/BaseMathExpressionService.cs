@@ -25,7 +25,8 @@
             this.random = random;
         }
 
-        protected IEnumerable<IRepresentable> GetRandomizedExpressions(int minValue, int maxValue, int expressionsCount, Type type)
+        protected IEnumerable<IRepresentable> GetRandomizedExpressions(
+            int minValue, int maxValue, int expressionsCount, Type type)
         {
             var constructorParametersCount = this.GetConstructorParametersCount(type);
 
@@ -50,7 +51,8 @@
             return allCombinations;
         }
 
-        protected IEnumerable<IRepresentable> GetSortedExpressions(int minValue, int maxValue, int expressionsCount, Type type)
+        protected IEnumerable<IRepresentable> GetSortedExpressions(
+            int minValue, int maxValue, int expressionsCount, Type type)
         {
             var constructorParametersCount = this.GetConstructorParametersCount(type);
 

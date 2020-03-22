@@ -18,10 +18,9 @@ namespace MathExpressionGenerator.Services.Implementations
 
         public void Add(IEnumerable<IRepresentable> representables)
         {
-            this.stringBuilder
-                    .AppendLine(string.Join(
-                        Environment.NewLine,
-                        representables.Select(me => me.InstanceRepresentation)));
+            this.stringBuilder.AppendLine(string.Join(
+                Environment.NewLine,
+                representables.Select(me => me.InstanceRepresentation)));
         }
 
         public void Clear()

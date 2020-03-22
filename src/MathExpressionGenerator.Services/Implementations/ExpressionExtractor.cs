@@ -19,8 +19,9 @@ namespace MathExpressionGenerator.Services.Implementations
                 .GetAssembly(typeof(BaseMathExpression))
                 .GetTypes()
                 .Where(t => t.IsClass
-                    && !t.IsAbstract
                     && !t.IsGenericType
+                    && !t.IsAbstract
+                    && typeof(BaseMathExpression) != t
                     && typeof(BaseMathExpression).IsAssignableFrom(t))
                 .Select(t => FormatterServices.GetUninitializedObject(t))
                 .Cast<BaseMathExpression>()

@@ -68,7 +68,9 @@
         public override string MaxCountOfExpressionsExceeded 
             => $"Max expressions count per singe generation " +
             $"is {Constants.ExpressionsCountMaxValue}.";
-        
+
+        public override string DownloadPCVersion => "Download for Windows";
+
         public override string ToString() => "English";
     }
 }

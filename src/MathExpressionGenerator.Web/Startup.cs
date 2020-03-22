@@ -1,11 +1,15 @@
-using ErrorLogger.Extensions;
-using MathExpressionGenerator.Common;
+using Amazon.DynamoDBv2;
+using DotNetExtensions.AspNetCore.Common;
 using MathExpressionGenerator.Common.Containers;
 using MathExpressionGenerator.Models.Factories.Implementations;
 using MathExpressionGenerator.Models.Factories.Interfaces;
 using MathExpressionGenerator.Services.Implementations;
 using MathExpressionGenerator.Services.Interfaces;
+using MathExpressionGenerator.Web.Abstractions;
 using MathExpressionGenerator.Web.Configuration;
+using MathExpressionGenerator.Web.Data.Abstractions;
+using MathExpressionGenerator.Web.Data.DAL;
+using MathExpressionGenerator.Web.Infrastructure.Containers;
 using MathExpressionGenerator.Web.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,13 +32,11 @@ namespace MathExpressionGenerator.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services
                 .Configure<CookiePolicyOptions>(options =>
                 {
-                    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                     options.CheckConsentNeeded = context => true;
                     options.MinimumSameSitePolicy = SameSiteMode.None;
                 })
@@ -43,8 +45,14 @@ namespace MathExpressionGenerator.Web
 
             services.AddSingleton(sp => sp.GetRequiredService<IOptions<LambdaOptions>>().Value);
             services.AddSingleton<ILanguageContainer, LanguageContainer>();
-            services.AddSingleton<IExpressionContainer, ExpressionContainer>();
+            services.AddSingleton<IBrowserRepository>(sp =>
+                new BrowserRepository(
+                    sp.GetRequiredService<IAmazonDynamoDB>(),
+                    Environment.GetEnvironmentVariable("BROWSERS_TABLE")));
+            
+            services.AddScoped<IUserSessionContainer, UserSessionContainer>();
 
+            services.AddAWSService<IAmazonDynamoDB>();
             services.AddTransient<IMathExpressionService, MathExpressionService>();
             services.AddTransient<IExpressionExtractor, ExpressionExtractor>();
             services.AddTransient<IMathExpressionFactory, MathExpressionFactory>();
@@ -52,34 +60,44 @@ namespace MathExpressionGenerator.Web
             
             services.AddTransient(sp => new Random());
             services.AddTransient(sp => new StringBuilder());
-            
-            services.AddErrorLogger(opt => 
-            {
-                opt.ErrorLoggerUrl = Secrets.ErrorLogServiceUrl;
-            });
-            
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
+                Environment.SetEnvironmentVariable(
+                    "BROWSERS_TABLE",
+                    "math_system_browsers_stage");
+
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler(appBuilder => appBuilder
-                    .Run(async context => 
-                    {
-                        context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                        await context.Response.WriteAsync("Bad request.");
-                    }));
-
                 app.UseHsts();
             }
 
+            app.Use(async (context, next) =>
+            {
+                try
+                {
+                    await next.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[EXCEPTION THROWN]: {ex.Message}");
+
+                    Console.WriteLine(ex.StackTrace);
+
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+
+                    await context.Response.WriteAsync("Bad request.");
+                }
+            });
+            app.LogRequestorIpAddress((str) => Console.WriteLine(str));
+            app.UseAnonymousBrowser();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -88,7 +106,7 @@ namespace MathExpressionGenerator.Web
             {
                 routes.MapRoute(
                     "deafult",
-                    "{controller=Home}/{action=Index}/{id?}");
+                    "{controller}/{action}");
             });
         }
     }

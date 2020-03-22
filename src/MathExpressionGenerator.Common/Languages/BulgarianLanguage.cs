@@ -69,6 +69,8 @@
             => $"Максималния брой изрази за всяко генериране " +
             $"е {Constants.ExpressionsCountMaxValue}.";
 
+        public override string DownloadPCVersion => "Свали версия за Windows";
+
         public override string ToString() => "Български";
     }
 }

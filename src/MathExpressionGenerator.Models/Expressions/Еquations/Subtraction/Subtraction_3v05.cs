@@ -20,8 +20,8 @@ namespace MathExpressionGenerator.Models.Expressions.Еquations.Subtraction
             this.d = this.a + this.b - this.c;
         }
 
-        public override string InstanceRepresentation => $"{Constants.VariableSymbol} + {b} - {c} = {d}";
+        public override string InstanceRepresentation => $"{base.VariableSymbol} + {b} - {c} = {d}";
 
-        public override string TypeRepresentation => $"{Constants.VariableSymbol} + b - c = d";
+        public override string TypeRepresentation => $"{base.VariableSymbol} + b - c = d";
     }
 }

@@ -6,6 +6,12 @@
 
     public interface IMathExpressionService
     {
-        IEnumerable<IRepresentable> GenerateMathExpressions(Type expressionType, int minValue, int maxValue, int count = int.MaxValue, bool random = false);
+        IEnumerable<IRepresentable> GenerateMathExpressions(
+            Type expressionType, 
+            int minValue, 
+            int maxValue, 
+            int count = int.MaxValue, 
+            bool random = false,
+            string variableSymbol = null);
     }
 }

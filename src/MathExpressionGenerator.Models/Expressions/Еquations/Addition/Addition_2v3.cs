@@ -16,8 +16,8 @@ namespace MathExpressionGenerator.Models.Expressions.Еquations.Addition
             this.c = this.a + this.b;
         }
         
-        public override string InstanceRepresentation => $"{a} + {Constants.VariableSymbol} = {this.c}";
+        public override string InstanceRepresentation => $"{a} + {base.VariableSymbol} = {this.c}";
 
-        public override string TypeRepresentation => $"a + {Constants.VariableSymbol} = c";
+        public override string TypeRepresentation => $"a + {base.VariableSymbol} = c";
     }
 }

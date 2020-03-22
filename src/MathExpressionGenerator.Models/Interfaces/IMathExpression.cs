@@ -5,5 +5,7 @@
     public interface IMathExpression
     {
         ExpressionType Type { get; }
+
+        string VariableSymbol { get; set; }
     }
 }

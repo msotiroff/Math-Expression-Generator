@@ -31,6 +31,7 @@
         string DivisionWarningMessage { get; }
         string OperandVaryWarningMessage { get; }
         string MaxCountOfExpressionsExceeded { get; }
+        string DownloadPCVersion { get; }
 
         string GetPropertyValue(string propertyName);
     }

@@ -33,7 +33,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="#" class="navbar-brand">@BaseController.CurrentLanguage.GeneratorTitle</a>
+                <a href="#" class="navbar-brand">@this.Context.GetLanguageFromCookie().GeneratorTitle</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -55,6 +55,10 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
+        <br />
+        <footer>
+            &copy; @DateTime.UtcNow.Year - Powered by <a href="https://github.com/msotiroff" target="_blank">Mihail Sotirov</a>
+        </footer>
     </div>
     <div id="animated-arrow" class="pull-left hideOnStart" style="padding-left: 4em">
         <img src="@lambdaOptions.DownloadArrowImagePath" />

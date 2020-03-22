@@ -18,11 +18,28 @@
             int minValue, 
             int maxValue, 
             int count = int.MaxValue, 
-            bool random = false)
+            bool random = false,
+            string variableSymbol = null)
         {
-            return random
-                ? base.GetRandomizedExpressions(minValue, maxValue, count, expressionType)
-                : base.GetSortedExpressions(minValue, maxValue, count, expressionType);
+            var expressions = random
+                ? base.GetRandomizedExpressions(
+                    minValue, maxValue, count, expressionType)
+                : base.GetSortedExpressions(
+                    minValue, maxValue, count, expressionType);
+
+            foreach (var expression in expressions)
+            {
+                var castedExpr = expression as IMathExpression;
+
+                if (castedExpr == null)
+                {
+                    continue;
+                }
+
+                castedExpr.VariableSymbol = variableSymbol;
+            }
+
+            return expressions;
         }
     }
 }

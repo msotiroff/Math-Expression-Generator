@@ -1,14 +1,17 @@
 ﻿@model MathExpressionGenerator.Web.Models.IndexViewModel
-@{
-    var lang = BaseController.CurrentLanguage;
-}
-@inject IExpressionContainer expressionContainer;
+@inject IUserSessionContainer sessionContainer;
 @inject LambdaOptions lambdaOptions;
 
+@{ 
+    ILanguage lang = this.Context.GetLanguageFromCookie();
+}
+
 <br />
-<br />
+<a href="https://github.com/msotiroff/Math-Expression-Generator/raw/master/exe/Math%20Gen%201.1%20portable.zip"
+   class="btn btn-default pull-right">@lang.DownloadPCVersion</a>
 <br />
 <span id="baseUrl" hidden>@lambdaOptions.ApplicationBasePath</span>
+
 <div class="container row index-container">
     <div class="col-md-4">
         <form asp-area="" asp-controller="home" asp-action="Index" method="post">
@@ -28,6 +31,12 @@
                 <select asp-for="ChosenExpressionType"
                         asp-items="@Model.AllExpressionTypes"
                         class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">@lang.ChooseVariableSymbol</label>
+                <select asp-for="SelectedVariableSymbol"
+                        asp-items="@Model.VariableSymbolItems"
+                        class="form-control col-sm-2"></select>
             </div>
             <div class="form-group">
                 <label class="control-label">@lang.ChooseMinOperand</label>
@@ -63,7 +72,7 @@
     </div>
     <div class="col-md-8">
         <br />
-        <textarea rows="14" class="form-control text-large" readonly>@expressionContainer.GetExpressionsAsString()</textarea>
+        <textarea rows="14" class="form-control text-large" readonly>@await this.sessionContainer.GetExpressionsAsStringAsync(this.Context)</textarea>
     </div>
     <div>
         <br />

@@ -330,3 +330,5 @@ ASALocalRun/
 .mfractor/
 /src/MathExpressionGenerator.Web/aws-lambda-tools-defaults.json
 /src/MathExpressionGenerator.Common/Secrets.cs
+/src/MathExpressionGenerator.Web/.serverless
+/src/MathExpressionGenerator.Web/serverless.yml

@@ -8,8 +8,8 @@ namespace MathExpressionGenerator.Models.Expressions.Еquations.Division
         {
         }
 
-        public override string InstanceRepresentation => $"{a} / {b} = {Constants.VariableSymbol}";
+        public override string InstanceRepresentation => $"{a} / {b} = {base.VariableSymbol}";
 
-        public override string TypeRepresentation => $"a / b = {Constants.VariableSymbol}";
+        public override string TypeRepresentation => $"a / b = {base.VariableSymbol}";
     }
 }

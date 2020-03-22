@@ -24,8 +24,8 @@
             this.result = this.a - this.b + this.c;
         }
         
-        public override string InstanceRepresentation => $"{a} - {Constants.VariableSymbol} + {c} = {result}";
+        public override string InstanceRepresentation => $"{a} - {base.VariableSymbol} + {c} = {result}";
 
-        public override string TypeRepresentation => $"a - {Constants.VariableSymbol} + c = d";
+        public override string TypeRepresentation => $"a - {base.VariableSymbol} + c = d";
     }
 }

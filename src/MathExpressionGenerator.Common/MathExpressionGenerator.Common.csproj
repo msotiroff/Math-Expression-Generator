@@ -47,7 +47,6 @@
     <Compile Include="Containers\LanguageContainer.cs" />
     <Compile Include="Languages\BaseLanguage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Secrets.cs" />
     <Compile Include="ViewModels\ExpressionViewModel.cs" />
     <Compile Include="Languages\BulgarianLanguage.cs" />
     <Compile Include="Languages\EnglishLanguage.cs" />

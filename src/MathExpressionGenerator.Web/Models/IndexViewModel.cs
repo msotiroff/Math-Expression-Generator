@@ -43,7 +43,14 @@ namespace MathExpressionGenerator.Web.Models
         public bool ShouldRandomize { get; set; }
         
         public string Result { get; set; }
-        
+
+        public string SelectedVariableSymbol { get; set; }
+
+        public IEnumerable<SelectListItem> VariableSymbolItems =>
+            Constants.AllPossibleVarialbeSymbols
+            .Select(vs => new SelectListItem(vs, vs, vs == this.SelectedVariableSymbol))
+            .ToArray();
+
         public void InitializeSelectLists(
             IEnumerable<ExpressionViewModel> expressions,
             ILanguage language)
