@@ -97,7 +97,7 @@ namespace MathExpressionGenerator.Web
                 }
             });
             app.LogRequestorIpAddress((str) => Console.WriteLine(str));
-            app.UseAnonymousBrowser();
+            app.UseAnonymousBrowser(TimeSpan.FromDays(30));
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
