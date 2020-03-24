@@ -20,6 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MathExpressionGenerator.Web
 {
@@ -49,7 +50,7 @@ namespace MathExpressionGenerator.Web
                 new BrowserRepository(
                     sp.GetRequiredService<IAmazonDynamoDB>(),
                     Environment.GetEnvironmentVariable("BROWSERS_TABLE")));
-            
+
             services.AddScoped<IUserSessionContainer, UserSessionContainer>();
 
             services.AddAWSService<IAmazonDynamoDB>();
@@ -57,7 +58,7 @@ namespace MathExpressionGenerator.Web
             services.AddTransient<IExpressionExtractor, ExpressionExtractor>();
             services.AddTransient<IMathExpressionFactory, MathExpressionFactory>();
             services.AddTransient<IFileService, FileService>();
-            
+
             services.AddTransient(sp => new Random());
             services.AddTransient(sp => new StringBuilder());
 
@@ -79,35 +80,41 @@ namespace MathExpressionGenerator.Web
                 app.UseHsts();
             }
 
-            app.Use(async (context, next) =>
-            {
-                try
+            app
+                .Use(async (context, next) =>
                 {
-                    await next.Invoke();
-                }
-                catch (Exception ex)
+                    await HandleExceptionAsync(context, next);
+                })
+                .LogRequestorIpAddress((str) => Console.WriteLine(str))
+                .UseAnonymousBrowser(TimeSpan.FromDays(30))
+                .UseHttpsRedirection()
+                .UseStaticFiles()
+                .UseCookiePolicy()
+                .UseMvc(routes =>
                 {
-                    Console.WriteLine($"[EXCEPTION THROWN]: {ex.Message}");
+                    routes.MapRoute(
+                        "deafult",
+                        "{controller}/{action}");
+                });
+        }
 
-                    Console.WriteLine(ex.StackTrace);
-
-                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
-
-                    await context.Response.WriteAsync("Bad request.");
-                }
-            });
-            app.LogRequestorIpAddress((str) => Console.WriteLine(str));
-            app.UseAnonymousBrowser(TimeSpan.FromDays(30));
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
-            
-            app.UseMvc(routes => 
+        private static async Task HandleExceptionAsync(
+            HttpContext context, Func<Task> next)
+        {
+            try
             {
-                routes.MapRoute(
-                    "deafult",
-                    "{controller}/{action}");
-            });
+                await next.Invoke();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[EXCEPTION THROWN]: {ex.Message}");
+
+                Console.WriteLine(ex.StackTrace);
+
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+
+                await context.Response.WriteAsync("Bad request.");
+            }
         }
     }
 }
