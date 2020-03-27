@@ -19,8 +19,8 @@ namespace MathExpressionGenerator.Models.Expressions.Еquations.Multiplication
 
         public override ExpressionOperation Operation => ExpressionOperation.Multiplication;
 
-        public override string InstanceRepresentation => $"{a} * {b} = {base.VariableSymbol}";
+        public override string InstanceRepresentation => $"{a} . {b} = {base.VariableSymbol}";
 
-        public override string TypeRepresentation => $"a * b = {base.VariableSymbol}";
+        public override string TypeRepresentation => $"a . b = {base.VariableSymbol}";
     }
 }
