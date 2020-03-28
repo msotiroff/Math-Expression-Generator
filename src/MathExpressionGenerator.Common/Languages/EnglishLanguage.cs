@@ -71,6 +71,8 @@
 
         public override string DownloadPCVersion => "Download for Windows";
 
+        public override string WatchDemo => "Watch DEMO";
+
         public override string ToString() => "English";
     }
 }

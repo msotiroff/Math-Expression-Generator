@@ -32,6 +32,7 @@
         string OperandVaryWarningMessage { get; }
         string MaxCountOfExpressionsExceeded { get; }
         string DownloadPCVersion { get; }
+        string WatchDemo { get; }
 
         string GetPropertyValue(string propertyName);
     }

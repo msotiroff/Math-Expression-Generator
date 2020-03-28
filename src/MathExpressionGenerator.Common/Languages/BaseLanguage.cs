@@ -34,6 +34,7 @@ namespace MathExpressionGenerator.Common.Languages
         public abstract string OperandVaryWarningMessage { get; }
         public abstract string MaxCountOfExpressionsExceeded { get; }
         public abstract string DownloadPCVersion { get; }
+        public abstract string WatchDemo { get; }
 
         public string GetPropertyValue(string propertyName)
         {

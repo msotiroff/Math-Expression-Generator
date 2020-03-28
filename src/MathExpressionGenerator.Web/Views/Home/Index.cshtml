@@ -2,13 +2,16 @@
 @inject IUserSessionContainer sessionContainer;
 @inject LambdaOptions lambdaOptions;
 
-@{ 
+@{
     ILanguage lang = this.Context.GetLanguageFromCookie();
 }
 
 <br />
 <a href="https://github.com/msotiroff/Math-Expression-Generator/raw/master/exe/Math%20Gen%201.3%20portable.exe"
    class="btn btn-default pull-right">@lang.DownloadPCVersion</a>
+<a class="btn btn-default pull-right" href="https://www.youtube.com/embed/hjV1StavZJ8"
+   onclick="return !window.open(this.href, 'DEMO')"
+   target="_blank">@lang.WatchDemo</a>
 <br />
 <span id="baseUrl" hidden>@lambdaOptions.ApplicationBasePath</span>
 
@@ -64,7 +67,8 @@
 
             <div class="form-group">
                 <div class="btn btn-success col-md-3" onclick="download();">@lang.Save</div>
-                <a asp-area="" asp-controller="home" asp-action="clear" class="btn btn-warning col-md-3">@lang.Clear</a>
+                <a id="btn-clear" href="#" class="btn btn-warning col-md-3">@lang.Clear</a>
+                @*<input type="submit" value="@lang.Add" class="btn btn-primary col-md-5" />*@
                 <input type="submit" value="@lang.Add" class="btn btn-primary col-md-5" />
             </div>
 
@@ -72,7 +76,7 @@
     </div>
     <div class="col-md-8">
         <br />
-        <textarea rows="14" class="form-control text-large" readonly>@await this.sessionContainer.GetExpressionsAsStringAsync(this.Context)</textarea>
+        <textarea id="expressions-text-area" rows="14" class="form-control text-large" readonly>@await this.sessionContainer.GetExpressionsAsStringAsync(this.Context)</textarea>
     </div>
     <div>
         <br />
@@ -82,13 +86,16 @@
 @section Scripts {
     <script>
         let baseUrl = (document).getElementById('baseUrl').innerText;
+
         function reload(dropDownValue) {
             window.location.href = baseUrl + '/home/index?expressionOperation=' + dropDownValue;
         }
+
         function download() {
             showAnimatedArrow();
             window.location.href = baseUrl + '/home/download';
         }
+
         $(document).ready(function () {
             let mathOperation = $('#ChosenExpressionOperation').val();
             let divisionAlertBox = document.getElementById('divisionAlertBox');
@@ -121,6 +128,13 @@
             } else {
                 $('#differenceAlertBox').fadeOut();
             }
+
+            $('#btn-clear').bind('click', function(e) {           
+                e.preventDefault(); // stop the browser from following the link
+                $('#expressions-text-area').val('');
+                let clearUrl = baseUrl + '/home/clear';
+                $.get(clearUrl);
+            });
         });
     </script>
 }

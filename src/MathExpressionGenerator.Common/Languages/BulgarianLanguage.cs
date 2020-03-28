@@ -71,6 +71,8 @@
 
         public override string DownloadPCVersion => "Свали версия за Windows";
 
+        public override string WatchDemo => "Гледай ДЕМО";
+
         public override string ToString() => "Български";
     }
 }
