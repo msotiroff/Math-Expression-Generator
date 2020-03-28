@@ -53,6 +53,7 @@ namespace MathExpressionGenerator.Web
 
             services.AddScoped<IUserSessionContainer, UserSessionContainer>();
 
+            services.AddDefaultAWSOptions(this.Configuration.GetAWSOptions());
             services.AddAWSService<IAmazonDynamoDB>();
             services.AddTransient<IMathExpressionService, MathExpressionService>();
             services.AddTransient<IExpressionExtractor, ExpressionExtractor>();
