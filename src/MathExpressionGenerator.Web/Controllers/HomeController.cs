@@ -104,7 +104,7 @@ namespace MathExpressionGenerator.Web.Controllers
         {
             await this.sessionContainer.ClearAsync(this.HttpContext);
 
-            return RedirectToAction(nameof(Index));
+            return Ok();
         }
 
         [HttpGet]
