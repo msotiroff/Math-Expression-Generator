@@ -37,7 +37,7 @@ namespace MathExpressionGenerator.Web.Infrastructure.Containers
                 return;
             }
 
-            var browserId = context.GetBrowserId();
+            var browserId = context.GetOrAddBrowserId();
             var browser = await this.browserRepository.GetAsync(browserId);
             var decompressed = browser?.CompressedExpressions?.TryDecompress();
             var userExpressions = decompressed
@@ -58,7 +58,7 @@ namespace MathExpressionGenerator.Web.Infrastructure.Containers
 
         public async Task ClearAsync(HttpContext context)
         {
-            var browserId = context.GetBrowserId();
+            var browserId = context.GetOrAddBrowserId();
 
             await this.browserRepository.ClearAsync(browserId);
         }
@@ -99,7 +99,7 @@ namespace MathExpressionGenerator.Web.Infrastructure.Containers
 
         private async Task<IEnumerable<BaseMathExpression>> GetExpressionsAsync(HttpContext context)
         {
-            var browserId = context.GetBrowserId();
+            var browserId = context.GetOrAddBrowserId();
             var browser = await this.browserRepository.GetAsync(browserId);
             var decompressed = browser?.CompressedExpressions?.TryDecompress();
             var deserialized = decompressed

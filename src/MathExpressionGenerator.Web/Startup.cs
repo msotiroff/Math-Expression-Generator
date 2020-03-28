@@ -88,9 +88,9 @@ namespace MathExpressionGenerator.Web
                 })
                 .LogRequestorIpAddress((str) => Console.WriteLine(str))
                 .UseHttpsRedirection()
+                .UseAnonymousBrowser(TimeSpan.FromDays(366))
                 .UseStaticFiles()
                 .UseCookiePolicy()
-                .UseAnonymousBrowser(TimeSpan.FromDays(30))
                 .UseMvc(routes =>
                 {
                     routes.MapRoute(
