@@ -87,10 +87,10 @@ namespace MathExpressionGenerator.Web
                     await HandleExceptionAsync(context, next);
                 })
                 .LogRequestorIpAddress((str) => Console.WriteLine(str))
-                .UseAnonymousBrowser(TimeSpan.FromDays(30))
                 .UseHttpsRedirection()
                 .UseStaticFiles()
                 .UseCookiePolicy()
+                .UseAnonymousBrowser(TimeSpan.FromDays(30))
                 .UseMvc(routes =>
                 {
                     routes.MapRoute(
