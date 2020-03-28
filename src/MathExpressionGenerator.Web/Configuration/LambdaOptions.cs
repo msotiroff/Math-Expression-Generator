@@ -1,8 +1,27 @@
-﻿namespace MathExpressionGenerator.Web.Configuration
+﻿using DotNetExtensions.Common;
+using System;
+
+namespace MathExpressionGenerator.Web.Configuration
 {
     public class LambdaOptions
     {
-        public string ApplicationBasePath { get; set; }
+        private string applicationBasePath;
+
+        public string ApplicationBasePath 
+        {
+            get
+            {
+                var pathFromEnvironment = Environment.GetEnvironmentVariable("PROXY_URL");
+
+                return pathFromEnvironment.IsNullOrWhiteSpace()
+                    ? this.applicationBasePath
+                    : pathFromEnvironment;
+            }
+            set
+            {
+                this.applicationBasePath = value;
+            }
+        }
 
         public string FaviconPath { get; set; }
 
