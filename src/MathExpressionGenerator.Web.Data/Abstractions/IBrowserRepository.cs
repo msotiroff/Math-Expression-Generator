@@ -9,6 +9,6 @@ namespace MathExpressionGenerator.Web.Data.Abstractions
 
         Task SaveAsync(Browser browser);
 
-        Task DeleteAsync(string id);
+        Task ClearAsync(string id);
     }
 }

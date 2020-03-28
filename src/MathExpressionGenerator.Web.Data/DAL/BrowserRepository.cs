@@ -22,36 +22,43 @@ namespace MathExpressionGenerator.Web.Data.DAL
             this.context = new DynamoDBContext(client, this.config);
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task ClearAsync(string id)
         {
             if (id.IsNullOrWhiteSpace())
             {
                 return;
             }
 
-            Console.WriteLine($"Deleting a Browser it id: {id}...");
+            var browser = await this.GetAsync(id);
 
-            await this.context.DeleteAsync<Browser>(id, this.config);
+            if (browser.IsNull())
+            {
+                return;
+            }
+
+            browser.CompressedExpressions = default;
+
+            await this.SaveAsync(browser);
         }
 
         public async Task<Browser> GetAsync(string id)
         {
-                if (id.IsNullOrWhiteSpace())
+            if (id.IsNullOrWhiteSpace())
+            {
+                return default;
+            }
+
+            var browser = await this.context.LoadAsync<Browser>(id, this.config);
+
+            if (browser.IsNull())
+            {
+                browser = new Browser
                 {
-                    return default;
-                }
+                    Id = id
+                };
+            }
 
-                var browser = await this.context.LoadAsync<Browser>(id, this.config);
-
-                if (browser.IsNull())
-                {
-                    browser = new Browser
-                    {
-                        Id = id
-                    };
-                }
-
-                return browser;
+            return browser;
         }
 
         public async Task SaveAsync(Browser browser)
@@ -62,7 +69,7 @@ namespace MathExpressionGenerator.Web.Data.DAL
             }
 
             browser.LastModified = DateTime.UtcNow;
-            browser.ExpirationTime = browser.LastModified.AddMonths(1).ToUnixTime() / 1000;
+            browser.ExpirationTime = browser.LastModified.AddYears(1).ToUnixTime() / 1000;
 
             await this.context.SaveAsync(browser, this.config);
         }

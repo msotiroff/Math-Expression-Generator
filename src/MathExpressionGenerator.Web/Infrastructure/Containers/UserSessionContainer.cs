@@ -51,6 +51,7 @@ namespace MathExpressionGenerator.Web.Infrastructure.Containers
             var compressedExpressions = serializedExpressions.Compress();
 
             browser.CompressedExpressions = compressedExpressions;
+            browser.IpAddress = context.Connection.RemoteIpAddress.ToString();
 
             await this.browserRepository.SaveAsync(browser);
         }
@@ -59,7 +60,7 @@ namespace MathExpressionGenerator.Web.Infrastructure.Containers
         {
             var browserId = context.GetBrowserId();
 
-            await this.browserRepository.DeleteAsync(browserId);
+            await this.browserRepository.ClearAsync(browserId);
         }
 
         public async Task<string> GetExpressionsAsStringAsync(HttpContext context)

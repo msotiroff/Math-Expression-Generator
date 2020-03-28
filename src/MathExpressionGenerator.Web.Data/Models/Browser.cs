@@ -20,5 +20,7 @@ namespace MathExpressionGenerator.Web.Data.Models
         public DateTime LastModified { get; set; }
 
         public long ExpirationTime { get; set; }
+
+        public string IpAddress { get; set; }
     }
 }
